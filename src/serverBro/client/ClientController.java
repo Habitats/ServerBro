@@ -1,10 +1,8 @@
 package serverBro.client;
 
 import serverBro.Config;
-import serverBro.Identity;
 import serverBro.Logger;
 import serverBro.NetworkController;
-import serverBro.events.AuthEvent;
 import serverBro.events.DiagnosisEvent;
 import serverBro.events.NetworkEvent;
 import serverBro.gui.BroController;
@@ -15,6 +13,8 @@ public class ClientController implements NetworkController {
 
   public ClientController(BroController broController) {
     this.broController = broController;
+    broController.setName("Client!");
+
     int port = Config.getInstance().getServerPort();
     String hostname = Config.getInstance().getServerHostName();
 
@@ -36,6 +36,7 @@ public class ClientController implements NetworkController {
     // }
   }
 
+  @Override
   public void evaluateIncoming(NetworkEvent event) {
     Logger.log("CLIENT CONTROLLER GOT EVENT");
 
@@ -56,6 +57,7 @@ public class ClientController implements NetworkController {
     }
   }
 
+  @Override
   public synchronized void sendNetworkEvent(NetworkEvent event) {
     clientOutgoing.sendNetworkEvent(event);
   }
@@ -74,12 +76,12 @@ public class ClientController implements NetworkController {
   @Override
   public void connect() {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
   public void disconnect() {
     // TODO Auto-generated method stub
-    
+
   }
 }

@@ -23,6 +23,7 @@ public class ServerController implements NetworkController {
   }
 
 
+  @Override
   public void evaluateIncoming(NetworkEvent event) {
     Logger.log("SERVER CONTROLLER GOT EVENT");
     DiagnosisEvent de =
@@ -33,6 +34,7 @@ public class ServerController implements NetworkController {
   }
 
 
+  @Override
   public void evaluteOutgoing(NetworkEvent event) {
     serverConnectionOutgoing.evaluate(event);
   }

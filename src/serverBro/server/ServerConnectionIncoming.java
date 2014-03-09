@@ -37,7 +37,8 @@ public class ServerConnectionIncoming implements Runnable {
     NetworkEvent event;
 
     try {
-      while ((event = (NetworkEvent) in.readObject()) != null && Config.getInstance().isNetworkEnabled()) {
+      while ((event = (NetworkEvent) in.readObject()) != null
+          && Config.getInstance().isNetworkEnabled()) {
         synchronized (event) {
           Logger.log("Server received: " + event);
           for (ClientConnection clientConnection : serverController.getClientConnections()) {
@@ -58,7 +59,8 @@ public class ServerConnectionIncoming implements Runnable {
     out.close();
     in.close();
     clientSocket.close();
-    serverController.evaluateIncoming(new AuthEvent(AuthEvent.EventType.LOG_OUT, clientConnection.getIdentity()));
+    serverController.evaluateIncoming(new AuthEvent(AuthEvent.EventType.LOG_OUT, clientConnection
+        .getIdentity()));
     serverController.getClientConnections().remove(clientConnection);
   }
 

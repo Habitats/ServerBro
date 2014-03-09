@@ -6,7 +6,7 @@ public class BroadCastEvent extends NetworkEvent {
   private final static boolean GLOBAL = true;
 
   public BroadCastEvent(Identity id) {
-    super(id, GLOBAL,EventType.BROADCAST);
+    super(id, GLOBAL, EventType.BROADCAST);
   }
 
 

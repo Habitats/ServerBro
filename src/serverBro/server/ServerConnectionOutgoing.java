@@ -29,7 +29,9 @@ public class ServerConnectionOutgoing {
     Identity sender = event.getSender();
     try {
       for (ClientConnection clientConnection : clientConnections) {
-        if (clientConnection.getIdentity() != null && clientConnection.getIdentity().getUsername().toLowerCase().equals(sender.getUsername().toLowerCase())) {
+        if (clientConnection.getIdentity() != null
+            && clientConnection.getIdentity().getUsername().toLowerCase()
+                .equals(sender.getUsername().toLowerCase())) {
           clientConnection.getOut().writeObject(event);
           clientConnection.getOut().reset();
         }

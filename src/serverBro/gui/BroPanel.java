@@ -1,6 +1,5 @@
 package serverBro.gui;
 
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.util.Observable;
@@ -44,8 +43,8 @@ public class BroPanel extends JPanel implements BroView, Observer {
 
   @Override
   public void update(Observable o, Object arg) {
-
     statusField.setText(arg.toString());
+    statusField.setName(arg.toString());
   }
 
   @Override

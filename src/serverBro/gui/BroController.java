@@ -7,7 +7,6 @@ import java.util.Observer;
 
 import serverBro.Config;
 import serverBro.NetworkController;
-import serverBro.client.ClientController;
 import serverBro.events.AuthEvent;
 import serverBro.utilities.ComputerProcess;
 
@@ -37,6 +36,11 @@ public class BroController implements ActionListener {
   public void actionPerformed(ActionEvent e) {
     System.out.println(e.getActionCommand());
     networkController.sendNetworkEvent(new AuthEvent(null, Config.getInstance().getId()));
+  }
+
+  public void setName(String name) {
+    model.setName(name);
+
   }
 
   public void displayProcesses(ArrayList<ComputerProcess> processes) {

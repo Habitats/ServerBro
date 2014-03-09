@@ -1,21 +1,14 @@
 package serverBro.gui;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-
 import javax.swing.JFrame;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
-
-import serverBro.ServerBro;
 
 public class BroFrame extends JFrame {
 
   public BroFrame(BroPanel panel) {
 
-    setName("Server Bro v0.1");
+    // setTitle("Server Bro v0.1");
 
     add(panel);
 
@@ -26,7 +19,6 @@ public class BroFrame extends JFrame {
 
     frame.getContentPane().setBackground(Color.black);
 
-    frame.setTitle("Status Panel");
     frame.pack();
 
     frame.setLocationRelativeTo(frame.getRootPane());
