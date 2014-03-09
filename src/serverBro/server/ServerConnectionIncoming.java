@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import serverBro.Config;
 import serverBro.Logger;
 import serverBro.events.AuthEvent;
 import serverBro.events.NetworkEvent;
@@ -36,7 +37,7 @@ public class ServerConnectionIncoming implements Runnable {
     NetworkEvent event;
 
     try {
-      while ((event = (NetworkEvent) in.readObject()) != null) {
+      while ((event = (NetworkEvent) in.readObject()) != null && Config.getInstance().isNetworkEnabled()) {
         synchronized (event) {
           Logger.log("Server received: " + event);
           for (ClientConnection clientConnection : serverController.getClientConnections()) {

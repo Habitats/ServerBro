@@ -14,12 +14,7 @@ import serverBro.ServerBro;
 public class BroFrame extends JFrame {
 
   public BroFrame(BroPanel panel) {
-    try {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-        | UnsupportedLookAndFeelException e) {
-      e.printStackTrace();
-    }
+
     setName("Server Bro v0.1");
 
     add(panel);

@@ -5,6 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
+import serverBro.Config;
 import serverBro.Logger;
 import serverBro.events.NetworkEvent;
 
@@ -27,21 +28,22 @@ public class ClientIncoming implements Runnable {
     try {
       clientSocket = new Socket(hostname, port);
     } catch (IOException e) {
-      Logger.log("Unable to connect. Exiting...");
-      kill();
+      Logger.log("Unable to connect...");
     }
     return clientSocket;
   }
 
   private void initConnection(Socket socket) {
     try {
-      ServerConnection serverConnection = new ServerConnection(new ObjectOutputStream(socket.getOutputStream()), socket);
+      ServerConnection serverConnection =
+          new ServerConnection(new ObjectOutputStream(socket.getOutputStream()), socket);
       clientController.setServerConnection(serverConnection);
       in = new ObjectInputStream(socket.getInputStream());
 
       NetworkEvent event;
       Logger.log("Initiating streams...");
-      while ((event = (NetworkEvent) in.readObject()) != null) {
+      while ((event = (NetworkEvent) in.readObject()) != null
+          && Config.getInstance().isNetworkEnabled()) {
         synchronized (event) {
           // Singleton.log("Client received: " + event.toString());
           clientController.evaluateIncoming(event);
@@ -52,16 +54,22 @@ public class ClientIncoming implements Runnable {
 
     } catch (IOException | ClassNotFoundException e) {
       Logger.log("Lost connection!");
-      e.printStackTrace();
-      kill();
     }
   }
 
   @Override
   public void run() {
-    Socket socket = setUpConnection(port, hostname);
-    initConnection(socket);
+    while (Config.getInstance().isNetworkEnabled()) {
+      Socket socket = setUpConnection(port, hostname);
+      if (socket != null)
+        initConnection(socket);
 
+      try {
+        Logger.log("COULDN'T CONNECT, RETRYING!");
+        Thread.sleep(1000);
+      } catch (InterruptedException e) {
+      }
+    }
     kill();
   }
 

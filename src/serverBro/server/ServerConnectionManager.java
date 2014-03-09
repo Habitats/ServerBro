@@ -3,6 +3,8 @@ package serverBro.server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+
+import serverBro.Config;
 import serverBro.Logger;
 
 
@@ -48,7 +50,7 @@ public class ServerConnectionManager implements Runnable {
     if ((serverSocket = setUpServer(port)) == null)
       return;
 
-    while (listening) {
+    while (Config.getInstance().isNetworkEnabled()) {
       clientSocket = listenForIncomfingConnections(serverSocket);
       startNetClientThread(clientSocket);
       String clientIp = clientSocket.getRemoteSocketAddress().toString().split("[/:]")[1];
@@ -62,7 +64,8 @@ public class ServerConnectionManager implements Runnable {
   }
 
   private void startNetClientThread(Socket clientSocket) {
-    ServerConnectionIncoming serverConnection = new ServerConnectionIncoming(clientSocket, serverController);
+    ServerConnectionIncoming serverConnection =
+        new ServerConnectionIncoming(clientSocket, serverController);
     Thread serverConnectionThread = new Thread(serverConnection);
     serverConnectionThread.start();
   }

@@ -15,19 +15,13 @@ public class ServerController implements NetworkController {
   private ServerConnectionOutgoing serverConnectionOutgoing;
   private List<ClientConnection> clientConnections;
   private BroController broController;
+  private ServerConnectionManager serverConnectionManager;
 
   public ServerController(BroController broController) {
     this.broController = broController;
-    int port = Config.getInstance().getServerPort();
-
-    clientConnections = new ArrayList<ClientConnection>();
-
-    serverConnectionOutgoing = new ServerConnectionOutgoing(clientConnections);
-
-    Thread serverThread = new Thread(new ServerConnectionManager(port, this));
-    serverThread.start();
-
+    connect();
   }
+
 
   public void evaluateIncoming(NetworkEvent event) {
     Logger.log("SERVER CONTROLLER GOT EVENT");
@@ -51,4 +45,24 @@ public class ServerController implements NetworkController {
 
   @Override
   public void sendNetworkEvent(NetworkEvent event) {}
+
+  @Override
+  public void connect() {
+    int port = Config.getInstance().getServerPort();
+
+    clientConnections = new ArrayList<ClientConnection>();
+
+    serverConnectionOutgoing = new ServerConnectionOutgoing(clientConnections);
+
+    serverConnectionManager = new ServerConnectionManager(port, this);
+    Thread serverThread = new Thread(serverConnectionManager);
+    serverThread.start();
+
+  }
+
+  @Override
+  public void disconnect() {
+    serverConnectionManager.setListening(false);
+  }
+
 }

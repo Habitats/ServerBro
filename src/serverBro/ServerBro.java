@@ -21,10 +21,10 @@ public class ServerBro {
       server = new ServerController(serverBro);
       serverBro.setNetworkController(server);
     }
-    if (Config.getInstance().isClient()) {
-      BroController clientBro = new BroController();
-      client = new ClientController(clientBro);
-      clientBro.setNetworkController(client);
-    }
+//    if (Config.getInstance().isClient()) {
+//      BroController clientBro = new BroController();
+//      client = new ClientController(clientBro);
+//      clientBro.setNetworkController(client);
+//    }
   }
 }

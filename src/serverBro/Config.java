@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 public class Config {
 
   private static Config instance;
@@ -15,6 +18,12 @@ public class Config {
     id = new Identity("mrherp");
 
     initCustomConfig();
+    try {
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+        | UnsupportedLookAndFeelException e) {
+      e.printStackTrace();
+    }
   }
 
   // ########### SINGLETON #######################################
@@ -57,11 +66,16 @@ public class Config {
   private boolean server;
   private boolean client;
   private Identity id;
+  private boolean networkEnabled = true;
 
   // SERVER
   private int serverPort;
   private boolean loginEnabled;
   private String serverHostname;
+
+  public void setNetworkEnabled(boolean networkEnabled) {
+    this.networkEnabled = networkEnabled;
+  }
 
   public boolean loginEnabled() {
     return loginEnabled;
@@ -85,6 +99,10 @@ public class Config {
 
   public Identity getId() {
     return id;
+  }
+
+  public boolean isNetworkEnabled() {
+    return networkEnabled;
   }
 
 }
