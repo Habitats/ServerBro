@@ -9,13 +9,23 @@ public abstract class NetworkEvent implements Serializable {
 
   public final Identity id;
   public final boolean global;
+  public final EventType type;
 
-  public NetworkEvent(Identity id, boolean global) {
+  public enum EventType {
+    AUTH, DIAGNOSTIC, BROADCAST;
+  }
+
+  public NetworkEvent(Identity id, boolean global, EventType type) {
     this.id = id;
     this.global = global;
+    this.type = type;
   }
 
   public Identity getSender() {
     return id;
+  }
+
+  public EventType getType() {
+    return type;
   }
 }

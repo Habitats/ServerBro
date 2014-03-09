@@ -13,7 +13,7 @@ public class AuthEvent extends NetworkEvent {
   private final static boolean GLOBAL = false;
 
   public AuthEvent(EventType type, Identity id) {
-    super(id, GLOBAL);
+    super(id, GLOBAL, NetworkEvent.EventType.AUTH);
     this.type = type;
   }
 

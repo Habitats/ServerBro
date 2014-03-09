@@ -5,13 +5,19 @@ import java.util.List;
 
 import serverBro.Config;
 import serverBro.Logger;
+import serverBro.NetworkController;
+import serverBro.events.DiagnosisEvent;
 import serverBro.events.NetworkEvent;
+import serverBro.gui.BroController;
+import serverBro.utilities.ComputerInfo;
 
-public class ServerController {
+public class ServerController implements NetworkController {
   private ServerConnectionOutgoing serverConnectionOutgoing;
   private List<ClientConnection> clientConnections;
+  private BroController broController;
 
-  public ServerController() {
+  public ServerController(BroController broController) {
+    this.broController = broController;
     int port = Config.getInstance().getServerPort();
 
     clientConnections = new ArrayList<ClientConnection>();
@@ -25,8 +31,11 @@ public class ServerController {
 
   public void evaluateIncoming(NetworkEvent event) {
     Logger.log("SERVER CONTROLLER GOT EVENT");
-//     serverConnectionOutgoing.broadcastNetworkEvent(event);
-    serverConnectionOutgoing.returnEventToSender(event);
+    DiagnosisEvent de =
+        new DiagnosisEvent(event.getSender(), false, new ComputerInfo().getRunningProcesses());
+    serverConnectionOutgoing.returnEventToSender(de);
+
+    broController.displayNetworkStatus(event.toString());
   }
 
 
@@ -40,5 +49,6 @@ public class ServerController {
 
   }
 
-
+  @Override
+  public void sendNetworkEvent(NetworkEvent event) {}
 }

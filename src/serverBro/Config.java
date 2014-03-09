@@ -12,6 +12,7 @@ public class Config {
 
   private Config() {
     properties = loadConfig("ServerBro.properties");
+    id = new Identity("mrherp");
 
     initCustomConfig();
   }
@@ -48,7 +49,14 @@ public class Config {
     serverPort = Integer.parseInt(properties.getProperty("server_port"));
     loginEnabled = Boolean.parseBoolean(properties.getProperty("login_enabled"));
     serverHostname = properties.getProperty("server_hostname");
+    server = Boolean.parseBoolean(properties.getProperty("server"));
+    client = Boolean.parseBoolean(properties.getProperty("client"));
   }
+
+  // GENERAL
+  private boolean server;
+  private boolean client;
+  private Identity id;
 
   // SERVER
   private int serverPort;
@@ -65,6 +73,18 @@ public class Config {
 
   public String getServerHostName() {
     return serverHostname;
+  }
+
+  public boolean isClient() {
+    return client;
+  }
+
+  public boolean isServer() {
+    return server;
+  }
+
+  public Identity getId() {
+    return id;
   }
 
 }

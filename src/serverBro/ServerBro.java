@@ -1,8 +1,7 @@
 package serverBro;
 
 import serverBro.client.ClientController;
-import serverBro.events.AuthEvent;
-import serverBro.events.BroadCastEvent;
+import serverBro.gui.BroController;
 import serverBro.server.ServerController;
 
 public class ServerBro {
@@ -15,18 +14,17 @@ public class ServerBro {
   }
 
   private void init() {
-    ServerController server = new ServerController();
-    ClientController client = new ClientController();
-    Identity id = new Identity("mrherp");
-
-    while (true) {
-      try {
-        Thread.sleep(500);
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-      client.sendNetworkEvent(new AuthEvent(null, id));
-      // server.evaluteOutgoing(new BroadCastEvent(null));
+    ClientController client = null;
+    ServerController server = null;
+    if (Config.getInstance().isServer()) {
+      BroController serverBro = new BroController();
+      server = new ServerController(serverBro);
+      serverBro.setNetworkController(server);
+    }
+    if (Config.getInstance().isClient()) {
+      BroController clientBro = new BroController();
+      client = new ClientController(clientBro);
+      clientBro.setNetworkController(client);
     }
   }
 }
