@@ -5,50 +5,37 @@ import java.io.Serializable;
 import serverBro.Authenticator;
 import serverBro.Config;
 import serverBro.Identity;
+import serverBro.NetworkController;
 
 public abstract class NetworkEvent implements Serializable, Event {
   private static final long serialVersionUID = 1L;
 
   public final Identity senderId;
   public final boolean global;
-  public final EventType type;
 
   private final Identity receiver;
 
-  public enum EventType {
-    AUTH, DIAGNOSTIC, BROADCAST;
+  private NetworkController controller;
+
+  public NetworkEvent(boolean global) {
+    this(global, null);
   }
 
-  public NetworkEvent(boolean global, EventType type) {
-    this(global, type, null);
-  }
-
-  public NetworkEvent(boolean global, EventType type, Identity receiver) {
+  public NetworkEvent(boolean global,  Identity receiver) {
     this.receiver = receiver;
     this.senderId = Config.getInstance().getId();
     this.global = global;
-    this.type = type;
   }
 
   public Identity getSender() {
     return senderId;
   }
 
-  public EventType getType() {
-    return type;
+  public void setController(NetworkController controller) {
+    this.controller = controller;
   }
 
-  @Override
-  public void onReceive() {
-    executeIncoming();
+  public NetworkController getController() {
+    return controller;
   }
-
-  @Override
-  public void onSend() {
-    executeOutgoing();
-  }
-
-  public abstract void executeIncoming();
-
-  public abstract void executeOutgoing();
 }

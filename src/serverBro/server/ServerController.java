@@ -26,11 +26,8 @@ public class ServerController implements NetworkController {
   @Override
   public void evaluateIncoming(NetworkEvent event) {
     Logger.log("SERVER CONTROLLER GOT EVENT");
-    DiagnosisEvent de =
-        new DiagnosisEvent(false, new ComputerInfo().getRunningProcesses(),event.getSender());
-    serverConnectionOutgoing.returnEventToSender(de);
-
-    broController.displayNetworkStatus(event.toString());
+    event.setController(this);
+    event.onReceive();
   }
 
 

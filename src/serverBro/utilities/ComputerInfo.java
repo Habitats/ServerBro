@@ -12,6 +12,8 @@ import org.apache.commons.io.IOUtils;
 public class ComputerInfo {
   private ArrayList<ComputerProcess> processes;
 
+  public ComputerInfo() {}
+
   private void updateRunningProcesses() {
     Process proc = null;
     String myString = null;
@@ -71,11 +73,6 @@ public class ComputerInfo {
       start += lengths.get(i) + 1;
     }
     return processLine.substring(start, start + lengths.get(index)).trim();
-
-  }
-
-  public static void main(String[] args) {
-    new ComputerInfo().getRunningProcesses();
 
   }
 }

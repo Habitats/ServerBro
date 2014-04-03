@@ -16,9 +16,8 @@ public class AuthEvent extends NetworkEvent {
   private Authenticator auth;
   private Identity authId;
 
-  public AuthEvent(EventType type) {
-    super(GLOBAL, NetworkEvent.EventType.AUTH);
-    this.type = type;
+  public AuthEvent() {
+    super(GLOBAL);
   }
 
   @Override
@@ -27,12 +26,12 @@ public class AuthEvent extends NetworkEvent {
   }
 
   @Override
-  public void executeIncoming() {
+  public void onReceive() {
     auth.authenticateUser(authId);
   }
 
   @Override
-  public void executeOutgoing() {
+  public void onSend() {
     this.authId = Config.getInstance().getId();
   }
 }

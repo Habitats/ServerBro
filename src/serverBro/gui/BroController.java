@@ -35,7 +35,7 @@ public class BroController implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e) {
     System.out.println(e.getActionCommand());
-    networkController.sendNetworkEvent(new AuthEvent(null));
+    networkController.sendNetworkEvent(new AuthEvent());
   }
 
   public void setName(String name) {

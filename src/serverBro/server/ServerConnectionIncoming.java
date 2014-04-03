@@ -59,7 +59,7 @@ public class ServerConnectionIncoming implements Runnable {
     out.close();
     in.close();
     clientSocket.close();
-    serverController.evaluateIncoming(new AuthEvent(AuthEvent.EventType.LOG_OUT));
+    serverController.evaluateIncoming(new AuthEvent());
     serverController.getClientConnections().remove(clientConnection);
   }
 

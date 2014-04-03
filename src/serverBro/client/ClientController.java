@@ -39,22 +39,8 @@ public class ClientController implements NetworkController {
   @Override
   public void evaluateIncoming(NetworkEvent event) {
     Logger.log("CLIENT CONTROLLER GOT EVENT");
-
-    // System.out.println(event.toString());
-
-    // broController.displayProcesses(event.toString());
-    switch (event.getType()) {
-      case AUTH:
-        broController.displayNetworkStatus(event.toString());
-        break;
-      case BROADCAST:
-        break;
-      case DIAGNOSTIC:
-        broController.displayProcesses(((DiagnosisEvent) event).getProcesses());
-        break;
-      default:
-        break;
-    }
+    event.setController(this);
+    event.onReceive();
   }
 
   @Override
@@ -68,20 +54,15 @@ public class ClientController implements NetworkController {
   }
 
   @Override
-  public void evaluteOutgoing(NetworkEvent event) {
-    // TODO Auto-generated method stub
-
-  }
+  public void evaluteOutgoing(NetworkEvent event) {}
 
   @Override
-  public void connect() {
-    // TODO Auto-generated method stub
-
-  }
+  public void connect() {}
 
   @Override
-  public void disconnect() {
-    // TODO Auto-generated method stub
+  public void disconnect() {}
 
+  public BroController getBroController() {
+    return broController;
   }
 }

@@ -2,16 +2,19 @@ package serverBro.events;
 
 import java.util.ArrayList;
 
+import javax.sound.midi.ControllerEventListener;
+
 import serverBro.Identity;
+import serverBro.utilities.ComputerInfo;
 import serverBro.utilities.ComputerProcess;
+import serverBro.client.ClientController;
 
-public class DiagnosisEvent extends NetworkEvent {
+public abstract class DiagnosisEvent extends NetworkEvent {
 
-  private final ArrayList<ComputerProcess> processes;
+  private ArrayList<ComputerProcess> processes;
 
-  public DiagnosisEvent(boolean global, ArrayList<ComputerProcess> processes, Identity senderId) {
-    super(global, EventType.DIAGNOSTIC,senderId);
-    this.processes = processes;
+  public DiagnosisEvent(boolean global, Identity senderId) {
+    super(global, senderId);
   }
 
   public ArrayList<ComputerProcess> getProcesses() {
@@ -21,15 +24,14 @@ public class DiagnosisEvent extends NetworkEvent {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    for (ComputerProcess process : processes) {
+    for (ComputerProcess process : getProcesses()) {
       sb.append(process.toString() + "\n");
     }
     return sb.toString();
   }
 
-  @Override
-  public void executeIncoming() {}
 
-  @Override
-  public void executeOutgoing() {}
+  public void setProcesses(ArrayList<ComputerProcess> processes) {
+    this.processes = processes;
+  }
 }

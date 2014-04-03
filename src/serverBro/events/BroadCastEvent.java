@@ -6,7 +6,7 @@ public class BroadCastEvent extends NetworkEvent {
   private final static boolean GLOBAL = true;
 
   public BroadCastEvent() {
-    super(GLOBAL, EventType.BROADCAST);
+    super(GLOBAL );
   }
 
 
@@ -17,15 +17,9 @@ public class BroadCastEvent extends NetworkEvent {
 
 
   @Override
-  public void executeIncoming() {
-    // TODO Auto-generated method stub
-
-  }
+  public void onReceive() {}
 
 
   @Override
-  public void executeOutgoing() {
-    // TODO Auto-generated method stub
-
-  }
+  public void onSend() {}
 }
