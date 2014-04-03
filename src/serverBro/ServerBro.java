@@ -4,6 +4,12 @@ import serverBro.client.ClientController;
 import serverBro.gui.BroController;
 import serverBro.server.ServerController;
 
+/**
+ * Main class for ParserBro
+ * 
+ * @author Patrick Skjennum
+ * 
+ */
 public class ServerBro {
   private ServerBro() {}
 

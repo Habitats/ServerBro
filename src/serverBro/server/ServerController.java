@@ -27,7 +27,7 @@ public class ServerController implements NetworkController {
   public void evaluateIncoming(NetworkEvent event) {
     Logger.log("SERVER CONTROLLER GOT EVENT");
     DiagnosisEvent de =
-        new DiagnosisEvent(event.getSender(), false, new ComputerInfo().getRunningProcesses());
+        new DiagnosisEvent(false, new ComputerInfo().getRunningProcesses(),event.getSender());
     serverConnectionOutgoing.returnEventToSender(de);
 
     broController.displayNetworkStatus(event.toString());
@@ -55,16 +55,13 @@ public class ServerController implements NetworkController {
     clientConnections = new ArrayList<ClientConnection>();
 
     serverConnectionOutgoing = new ServerConnectionOutgoing(clientConnections);
-
     serverConnectionManager = new ServerConnectionManager(port, this);
     Thread serverThread = new Thread(serverConnectionManager);
     serverThread.start();
-
   }
 
   @Override
   public void disconnect() {
     serverConnectionManager.setListening(false);
   }
-
 }

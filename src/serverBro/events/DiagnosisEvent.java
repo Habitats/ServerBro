@@ -9,8 +9,8 @@ public class DiagnosisEvent extends NetworkEvent {
 
   private final ArrayList<ComputerProcess> processes;
 
-  public DiagnosisEvent(Identity id, boolean global, ArrayList<ComputerProcess> processes) {
-    super(id, global, EventType.DIAGNOSTIC);
+  public DiagnosisEvent(boolean global, ArrayList<ComputerProcess> processes, Identity senderId) {
+    super(global, EventType.DIAGNOSTIC,senderId);
     this.processes = processes;
   }
 
@@ -26,4 +26,10 @@ public class DiagnosisEvent extends NetworkEvent {
     }
     return sb.toString();
   }
+
+  @Override
+  public void executeIncoming() {}
+
+  @Override
+  public void executeOutgoing() {}
 }
