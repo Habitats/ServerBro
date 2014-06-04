@@ -1,8 +1,7 @@
 package serverBro;
 
-import serverBro.client.ClientController;
-import serverBro.gui.BroController;
-import serverBro.server.ServerController;
+import serverBro.broClient.ClientController;
+import serverBro.broServer.ServerController;
 
 /**
  * Main class for ParserBro
@@ -20,17 +19,11 @@ public class ServerBro {
   }
 
   private void init() {
-    ClientController client = null;
-    ServerController server = null;
     if (Config.getInstance().isServer()) {
-      BroController serverBro = new BroController();
-      server = new ServerController(serverBro);
-      serverBro.setNetworkController(server);
+      Controller server = new ServerController();
     }
     if (Config.getInstance().isClient()) {
-      BroController clientBro = new BroController();
-      client = new ClientController(clientBro);
-      clientBro.setNetworkController(client);
+      Controller client = new ClientController();
     }
   }
 }

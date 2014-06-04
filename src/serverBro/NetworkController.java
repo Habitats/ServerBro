@@ -1,9 +1,9 @@
 package serverBro;
 
-import serverBro.events.NetworkEvent;
+import serverBro.events.networkEvents.NetworkEvent;
 
 public interface NetworkController {
-  public void evaluteOutgoing(NetworkEvent event);
+  public void sendEvent(NetworkEvent event);
 
   public void evaluateIncoming(NetworkEvent event);
 

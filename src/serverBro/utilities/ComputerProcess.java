@@ -39,7 +39,6 @@ public class ComputerProcess implements Serializable {
 
   @Override
   public String toString() {
-    return "Name: " + processName + " - Session: " + sessionId + " - PID: " + pid + " - MEM: "
-        + memory + " - Status: " + status;
+    return "Name: " + processName + " - Session: " + sessionId + " - PID: " + pid + " - MEM: " + memory + " - Status: " + status;
   }
 }
