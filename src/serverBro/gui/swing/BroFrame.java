@@ -11,7 +11,7 @@ public class BroFrame {
   public BroFrame(JPanel panel) {
 
     JFrame frame = new JFrame();
-    frame.add((JPanel) panel);
+    frame.add(panel);
     frame.setTitle("ServerBro");
     buildFrame(frame);
   }

@@ -49,8 +49,8 @@ public class BroPanel extends JPanel implements Observer {
   }
 
   public void setController(BroGui controller) {
-    connectButton.addActionListener((BroGui) controller);
-    disconnectButton.addActionListener((BroGui) controller);
-    sendButton.addActionListener((BroGui) controller);
+    connectButton.addActionListener(controller);
+    disconnectButton.addActionListener(controller);
+    sendButton.addActionListener(controller);
   }
 }

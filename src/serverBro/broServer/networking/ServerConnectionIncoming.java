@@ -7,7 +7,6 @@ import java.net.Socket;
 
 import serverBro.Config;
 import serverBro.Logger;
-import serverBro.events.networkEvents.AuthEvent;
 import serverBro.events.networkEvents.NetworkEvent;
 
 /**
@@ -58,7 +57,7 @@ public class ServerConnectionIncoming implements Runnable {
     out.close();
     in.close();
     clientSocket.close();
-//    serverController.evaluateIncoming(new AuthEvent());
+    // serverController.evaluateIncoming(new AuthEvent());
     serverController.getClientConnections().remove(clientConnection);
   }
 

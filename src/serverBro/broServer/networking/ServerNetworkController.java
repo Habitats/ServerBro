@@ -8,7 +8,7 @@ import serverBro.Controller;
 import serverBro.NetworkController;
 import serverBro.events.networkEvents.NetworkEvent;
 
-public class ServerNetworkController implements NetworkController{
+public class ServerNetworkController implements NetworkController {
   private ServerConnectionOutgoing serverConnectionOutgoing;
   private List<ClientConnection> clientConnections;
   private ServerConnectionManager serverConnectionManager;
@@ -60,6 +60,6 @@ public class ServerNetworkController implements NetworkController{
   @Override
   public void sendNetworkEvent(NetworkEvent event) {
     // TODO Auto-generated method stub
-    
+
   }
 }

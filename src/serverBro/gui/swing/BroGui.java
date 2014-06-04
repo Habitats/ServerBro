@@ -21,7 +21,7 @@ public class BroGui implements ActionListener, BroView {
 
   public BroGui() {
     view = new BroPanel();
-    frame = new BroFrame((BroPanel) view);
+    frame = new BroFrame(view);
     view.setController(this);
   }
 
@@ -46,7 +46,7 @@ public class BroGui implements ActionListener, BroView {
 
   @Override
   public void setModel(BroModel model) {
-    model.addObserver((Observer) view);
+    model.addObserver(view);
     this.model = model;
   }
 

@@ -10,6 +10,7 @@ public class DiagnosisClientEvent extends DiagnosisEvent {
 
   @Override
   public void execute() {
-//    ((ClientNetworkController) getController()).getBroController().displayProcesses(getProcesses());
+    // ((ClientNetworkController)
+    // getController()).getBroController().displayProcesses(getProcesses());
   }
 }
