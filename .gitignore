@@ -2,7 +2,7 @@ ignore/
 files/
 *.db
 *.cfg
-
+*.ucls
 
 ####################### Eclipse ################################
 *.pydevproject
