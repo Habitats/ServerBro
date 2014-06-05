@@ -1,10 +1,10 @@
 package serverBro.broClient.networking;
 
-import serverBro.Config;
-import serverBro.Controller;
-import serverBro.NetworkController;
-import serverBro.events.networkEvents.NetworkEvent;
-import serverBro.gui.swing.BroGuiController;
+import serverBro.broShared.Config;
+import serverBro.broShared.Controller;
+import serverBro.broShared.NetworkController;
+import serverBro.broShared.events.external.NetworkEvent;
+import serverBro.broShared.view.BroGuiController;
 
 public class ClientNetworkController implements NetworkController {
   private ClientOutgoing clientOutgoing;

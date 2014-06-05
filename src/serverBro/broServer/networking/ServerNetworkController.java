@@ -3,10 +3,10 @@ package serverBro.broServer.networking;
 import java.util.ArrayList;
 import java.util.List;
 
-import serverBro.Config;
-import serverBro.Controller;
-import serverBro.NetworkController;
-import serverBro.events.networkEvents.NetworkEvent;
+import serverBro.broShared.Config;
+import serverBro.broShared.Controller;
+import serverBro.broShared.NetworkController;
+import serverBro.broShared.events.external.NetworkEvent;
 
 public class ServerNetworkController implements NetworkController {
   private ServerConnectionOutgoing serverConnectionOutgoing;

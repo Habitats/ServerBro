@@ -3,8 +3,8 @@ package serverBro.broServer.networking;
 import java.io.IOException;
 import java.util.List;
 
-import serverBro.Identity;
-import serverBro.events.networkEvents.NetworkEvent;
+import serverBro.broShared.Identity;
+import serverBro.broShared.events.external.NetworkEvent;
 
 public class ServerConnectionOutgoing {
 
@@ -17,7 +17,7 @@ public class ServerConnectionOutgoing {
   }
 
   public void sendEvent(NetworkEvent event) {
-    if (event.global)
+    if (event.messageType == NetworkEvent.GLOBAL)
       broadcastNetworkEvent(event);
     else {
       returnEventToSender(event);

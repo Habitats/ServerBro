@@ -3,7 +3,7 @@ package serverBro.broServer.networking;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import serverBro.Identity;
+import serverBro.broShared.Identity;
 
 
 /**

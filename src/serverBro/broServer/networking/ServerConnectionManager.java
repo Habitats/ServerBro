@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import serverBro.Config;
-import serverBro.Logger;
+import serverBro.broShared.Config;
+import serverBro.broShared.Logger;
 
 
 public class ServerConnectionManager implements Runnable {

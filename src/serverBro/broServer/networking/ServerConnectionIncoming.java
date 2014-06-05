@@ -5,9 +5,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import serverBro.Config;
-import serverBro.Logger;
-import serverBro.events.networkEvents.NetworkEvent;
+import serverBro.broShared.Config;
+import serverBro.broShared.Logger;
+import serverBro.broShared.events.external.NetworkEvent;
 
 /**
  * Handles the connection with a single client. Event client gets it's own connection on it's own

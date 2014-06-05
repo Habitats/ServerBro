@@ -3,9 +3,9 @@ package serverBro.broServer;
 import java.util.HashMap;
 import java.util.Map;
 
-import serverBro.Config;
-import serverBro.Identity;
-import serverBro.events.networkEvents.NetworkEvent;
+import serverBro.broShared.Config;
+import serverBro.broShared.Identity;
+import serverBro.broShared.events.external.NetworkEvent;
 
 public class Authenticator {
   private Map<String, Identity> authenticatedUsers;

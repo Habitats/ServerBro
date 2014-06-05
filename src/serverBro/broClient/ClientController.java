@@ -1,14 +1,14 @@
 package serverBro.broClient;
 
 
-import serverBro.Controller;
-import serverBro.Logger;
-import serverBro.NetworkController;
 import serverBro.broClient.networking.ClientNetworkController;
-import serverBro.events.interaction.ViewEvent;
-import serverBro.events.networkEvents.NetworkEvent;
-import serverBro.gui.BroView;
-import serverBro.gui.swing.BroGuiController;
+import serverBro.broShared.Controller;
+import serverBro.broShared.Logger;
+import serverBro.broShared.NetworkController;
+import serverBro.broShared.events.external.NetworkEvent;
+import serverBro.broShared.events.internal.ViewEvent;
+import serverBro.broShared.view.BroGuiController;
+import serverBro.broShared.view.BroView;
 
 public class ClientController extends Controller {
   private NetworkController clientNetworkController;
@@ -25,8 +25,7 @@ public class ClientController extends Controller {
   @Override
   public void incomingEvent(NetworkEvent event) {
     Logger.log("CLIENT CONTROLLER GOT EVENT");
-    event.setController(this);
-    event.execute();
+    event.execute(this);
   }
 
   @Override
@@ -62,6 +61,6 @@ public class ClientController extends Controller {
 
   @Override
   public void actionPerformed(ViewEvent viewEvent) {
-    viewEvent.execute();
+    viewEvent.execute(this);
   }
 }

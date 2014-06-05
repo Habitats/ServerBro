@@ -5,9 +5,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import serverBro.Config;
-import serverBro.Logger;
-import serverBro.events.networkEvents.NetworkEvent;
+import serverBro.broShared.Config;
+import serverBro.broShared.Logger;
+import serverBro.broShared.events.external.NetworkEvent;
 
 public class ClientIncoming implements Runnable {
   private final String hostname;

@@ -2,7 +2,7 @@ package serverBro.broClient.networking;
 
 import java.io.IOException;
 
-import serverBro.events.networkEvents.NetworkEvent;
+import serverBro.broShared.events.external.NetworkEvent;
 
 /**
  * Handles incoming events from server

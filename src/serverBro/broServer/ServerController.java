@@ -1,13 +1,13 @@
 package serverBro.broServer;
 
-import serverBro.Controller;
-import serverBro.Logger;
-import serverBro.NetworkController;
 import serverBro.broServer.networking.ServerNetworkController;
-import serverBro.events.interaction.ViewEvent;
-import serverBro.events.networkEvents.NetworkEvent;
-import serverBro.gui.BroView;
-import serverBro.gui.swing.BroGuiController;
+import serverBro.broShared.Controller;
+import serverBro.broShared.Logger;
+import serverBro.broShared.NetworkController;
+import serverBro.broShared.events.external.NetworkEvent;
+import serverBro.broShared.events.internal.ViewEvent;
+import serverBro.broShared.view.BroGuiController;
+import serverBro.broShared.view.BroView;
 
 public class ServerController extends Controller {
   private NetworkController networkController;
@@ -40,7 +40,7 @@ public class ServerController extends Controller {
     event.setController(this);
 
     if (auth.authenticate(event)) {
-      event.execute();
+      event.execute(this);
     }
   }
 
@@ -62,7 +62,7 @@ public class ServerController extends Controller {
 
   @Override
   public void actionPerformed(ViewEvent viewEvent) {
-    viewEvent.execute();
+    viewEvent.execute(this);
   }
 
 
