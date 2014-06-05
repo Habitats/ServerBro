@@ -5,10 +5,10 @@ import serverBro.Controller;
 import serverBro.Logger;
 import serverBro.NetworkController;
 import serverBro.broClient.networking.ClientNetworkController;
+import serverBro.events.interaction.ViewEvent;
 import serverBro.events.networkEvents.NetworkEvent;
-import serverBro.events.viewEvents.ViewEvent;
 import serverBro.gui.BroView;
-import serverBro.gui.swing.BroGui;
+import serverBro.gui.swing.BroGuiController;
 
 public class ClientController extends Controller {
   private NetworkController clientNetworkController;
@@ -55,7 +55,7 @@ public class ClientController extends Controller {
 
   @Override
   protected BroView createView() {
-    BroGui view = new BroGui();
+    BroGuiController view = new BroGuiController();
     view.setBroViewListener(this);
     return view;
   }

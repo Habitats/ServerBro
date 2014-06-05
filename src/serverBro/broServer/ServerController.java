@@ -4,10 +4,10 @@ import serverBro.Controller;
 import serverBro.Logger;
 import serverBro.NetworkController;
 import serverBro.broServer.networking.ServerNetworkController;
+import serverBro.events.interaction.ViewEvent;
 import serverBro.events.networkEvents.NetworkEvent;
-import serverBro.events.viewEvents.ViewEvent;
 import serverBro.gui.BroView;
-import serverBro.gui.swing.BroGui;
+import serverBro.gui.swing.BroGuiController;
 
 public class ServerController extends Controller {
   private NetworkController networkController;
@@ -28,7 +28,7 @@ public class ServerController extends Controller {
 
   @Override
   protected BroView createView() {
-    BroView broView = new BroGui();
+    BroView broView = new BroGuiController();
     broView.setBroViewListener(this);
     return broView;
   }
@@ -38,7 +38,10 @@ public class ServerController extends Controller {
   public void incomingEvent(NetworkEvent event) {
     Logger.log("SERVER CONTROLLER GOT EVENT");
     event.setController(this);
-    event.execute();
+
+    if (auth.authenticate(event)) {
+      event.execute();
+    }
   }
 
   @Override
@@ -58,8 +61,8 @@ public class ServerController extends Controller {
   }
 
   @Override
-  public void actionPerformed(ViewEvent e) {
-    e.execute();
+  public void actionPerformed(ViewEvent viewEvent) {
+    viewEvent.execute();
   }
 
 

@@ -1,16 +1,17 @@
-package serverBro.events.networkEvents;
+package serverBro.events.networkEvents.diagnostic;
 
 import java.util.ArrayList;
 
-import serverBro.Identity;
+import serverBro.events.networkEvents.NetworkEvent;
+import serverBro.utilities.ComputerInfo;
 import serverBro.utilities.ComputerProcess;
 
-public abstract class DiagnosisEvent extends NetworkEvent {
-
+public class ProcessEvent extends NetworkEvent {
   private ArrayList<ComputerProcess> processes;
 
-  public DiagnosisEvent(boolean global, Identity senderId) {
-    super(global, senderId);
+  public ProcessEvent() {
+    super(true, null);
+    setProcesses(new ComputerInfo().getRunningProcesses());
   }
 
   public ArrayList<ComputerProcess> getProcesses() {
@@ -29,5 +30,10 @@ public abstract class DiagnosisEvent extends NetworkEvent {
 
   public void setProcesses(ArrayList<ComputerProcess> processes) {
     this.processes = processes;
+  }
+
+  @Override
+  public void execute() {
+    getController().model.setProcesses(processes);
   }
 }

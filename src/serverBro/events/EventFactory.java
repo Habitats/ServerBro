@@ -4,15 +4,14 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.JComponent;
 
-import serverBro.Config;
 import serverBro.Controller;
-import serverBro.events.networkEvents.AuthEvent;
+import serverBro.events.interaction.ConnectEvent;
+import serverBro.events.interaction.InfoEvent;
+import serverBro.events.interaction.DisconnectEvent;
+import serverBro.events.interaction.SendEvent;
+import serverBro.events.interaction.ViewEvent;
 import serverBro.events.networkEvents.MessageEvent;
 import serverBro.events.networkEvents.NetworkEvent;
-import serverBro.events.viewEvents.ConnectEvent;
-import serverBro.events.viewEvents.DisconnectEvent;
-import serverBro.events.viewEvents.SendEvent;
-import serverBro.events.viewEvents.ViewEvent;
 import serverBro.gui.swing.BroGuiConstants;
 
 
@@ -30,13 +29,11 @@ public class EventFactory {
       viewEvent = new ConnectEvent(controller);
     } else if (sourceName.equals(BroGuiConstants.DISCONNECT)) {
       viewEvent = new DisconnectEvent(controller);
+    } else if (sourceName.equals(BroGuiConstants.INFO)) {
+      viewEvent = new InfoEvent(controller);
     } else if (sourceName.equals(BroGuiConstants.SEND)) {
       viewEvent = new SendEvent(controller);
     }
     return viewEvent;
-  }
-
-  public static AuthEvent createAuthEvent() {
-    return new AuthEvent(Config.getInstance().getId());
   }
 }

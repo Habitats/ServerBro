@@ -4,11 +4,11 @@ import serverBro.Config;
 import serverBro.Controller;
 import serverBro.NetworkController;
 import serverBro.events.networkEvents.NetworkEvent;
-import serverBro.gui.swing.BroGui;
+import serverBro.gui.swing.BroGuiController;
 
 public class ClientNetworkController implements NetworkController {
   private ClientOutgoing clientOutgoing;
-  private BroGui broController;
+  private BroGuiController broController;
   private Controller clientController;
 
   public ClientNetworkController(Controller clientController) {
@@ -40,18 +40,15 @@ public class ClientNetworkController implements NetworkController {
     clientController.incomingEvent(event);
   }
 
-  @Override
-  public synchronized void sendNetworkEvent(NetworkEvent event) {
-    clientOutgoing.sendNetworkEvent(event);
-  }
-
 
   public void setServerConnection(ServerConnection serverConnection) {
     clientOutgoing.setServerConnection(serverConnection);
   }
 
   @Override
-  public void sendEvent(NetworkEvent event) {}
+  public void sendEvent(NetworkEvent event) {
+    clientOutgoing.sendNetworkEvent(event);
+  }
 
   @Override
   public void connect() {}
@@ -59,7 +56,7 @@ public class ClientNetworkController implements NetworkController {
   @Override
   public void disconnect() {}
 
-  public BroGui getBroController() {
+  public BroGuiController getBroController() {
     return broController;
   }
 }

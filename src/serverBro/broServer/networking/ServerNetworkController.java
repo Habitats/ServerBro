@@ -55,11 +55,4 @@ public class ServerNetworkController implements NetworkController {
   public void evaluateIncoming(NetworkEvent event) {
     serverController.incomingEvent(event);
   }
-
-
-  @Override
-  public void sendNetworkEvent(NetworkEvent event) {
-    // TODO Auto-generated method stub
-
-  }
 }

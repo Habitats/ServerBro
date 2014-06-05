@@ -1,4 +1,4 @@
-package serverBro.events.viewEvents;
+package serverBro.events.interaction;
 
 import serverBro.Controller;
 

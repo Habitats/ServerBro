@@ -1,8 +1,8 @@
-package serverBro.events.viewEvents;
+package serverBro.events.interaction;
 
 import serverBro.Controller;
-import serverBro.events.networkEvents.MessageEvent;
 import serverBro.events.networkEvents.NetworkEvent;
+import serverBro.events.networkEvents.diagnostic.ProcessEvent;
 
 public class SendEvent extends ViewEvent {
 
@@ -12,7 +12,9 @@ public class SendEvent extends ViewEvent {
 
   @Override
   public void execute() {
-    NetworkEvent message = new MessageEvent("Hello!");
-    controller.sendEvent(message);
+    // NetworkEvent event = new MessageEvent("Hello!");
+    NetworkEvent event = new ProcessEvent();
+
+    controller.sendEvent(event);
   }
 }

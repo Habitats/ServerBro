@@ -12,14 +12,14 @@ import serverBro.gui.BroView;
 import serverBro.gui.BroViewListener;
 import serverBro.utilities.ComputerProcess;
 
-public class BroGui implements ActionListener, BroView {
+public class BroGuiController implements ActionListener, BroView {
 
   private BroModel model;
   private BroPanel view;
   private BroFrame frame;
   private BroViewListener controller;
 
-  public BroGui() {
+  public BroGuiController() {
     view = new BroPanel();
     frame = new BroFrame(view);
     view.setController(this);

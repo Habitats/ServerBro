@@ -7,8 +7,6 @@ public interface NetworkController {
 
   public void evaluateIncoming(NetworkEvent event);
 
-  public void sendNetworkEvent(NetworkEvent event);
-
   public void connect();
 
   public void disconnect();

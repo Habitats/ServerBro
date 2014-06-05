@@ -7,7 +7,7 @@ public class MessageEvent extends NetworkEvent {
   public final String message;
 
   public MessageEvent(String message) {
-    super(true);
+    super();
     this.message = message;
   }
 

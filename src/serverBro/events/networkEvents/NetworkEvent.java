@@ -17,6 +17,10 @@ public abstract class NetworkEvent implements Serializable, BroEvent {
 
   private Controller controller;
 
+  public NetworkEvent() {
+    this(false);
+  }
+
   public NetworkEvent(boolean global) {
     this(global, null);
   }
