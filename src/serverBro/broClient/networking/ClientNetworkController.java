@@ -2,6 +2,7 @@ package serverBro.broClient.networking;
 
 import serverBro.broShared.Config;
 import serverBro.broShared.Controller;
+import serverBro.broShared.Logger;
 import serverBro.broShared.NetworkController;
 import serverBro.broShared.events.external.NetworkEvent;
 import serverBro.broShared.view.BroGuiController;
@@ -10,33 +11,16 @@ public class ClientNetworkController implements NetworkController {
   private ClientOutgoing clientOutgoing;
   private BroGuiController broController;
   private Controller clientController;
+  private ClientIncoming clientIncoming;
 
   public ClientNetworkController(Controller clientController) {
     this.clientController = clientController;
 
-    int port = Config.getInstance().getServerPort();
-    String hostname = Config.getInstance().getServerHostName();
-
-    clientOutgoing = new ClientOutgoing();
-    Thread clientThread = new Thread(new ClientIncoming(port, hostname, this));
-    clientThread.start();
-
-
-
-    // while (true) {
-    // try {
-    // Thread.sleep(5000);
-    // } catch (InterruptedException e) {
-    // e.printStackTrace();
-    // }
-    // sendNetworkEvent(new AuthEvent(null, id));
-    // sendNetworkEvent(new DiagnosisEvent(id, false, null));
-    // server.evaluteOutgoing(new BroadCastEvent(null));
-    // }
   }
 
   @Override
   public void evaluateIncoming(NetworkEvent event) {
+    Logger.log("Client received: " + event);
     clientController.incomingEvent(event);
   }
 
@@ -47,14 +31,37 @@ public class ClientNetworkController implements NetworkController {
 
   @Override
   public void sendEvent(NetworkEvent event) {
-    clientOutgoing.sendNetworkEvent(event);
+    if (Config.getInstance().isConnected()) {
+      Logger.log("Client sent: " + event);
+      clientOutgoing.sendNetworkEvent(event);
+    } else {
+      Logger.log("Unable to send network event. Not connected!");
+    }
   }
 
   @Override
-  public void connect() {}
+  public void connect() {
+    boolean connected = Config.getInstance().isConnected();
+    if (!connected) {
+      clientOutgoing = new ClientOutgoing();
+      Config.getInstance().setConnected(true);
+      int port = Config.getInstance().getServerPort();
+      String hostname = Config.getInstance().getServerHostName();
+      clientIncoming = new ClientIncoming(port, hostname, this);
+      Thread clientThread = new Thread(clientIncoming);
+      clientThread.start();
+      Logger.log("Client disconnected!");
+    } else {
+      Logger.log("Client already connected, disconnect first!");
+    }
+  }
 
   @Override
-  public void disconnect() {}
+  public void disconnect() {
+    Logger.log("Disconnecting client...");
+    clientIncoming.kill();
+    Config.getInstance().setConnected(false);
+  }
 
   public BroGuiController getBroController() {
     return broController;

@@ -18,6 +18,7 @@ public class ServerConnectionManager implements Runnable {
   private int port;
   private boolean listening;
   private ServerNetworkController serverController;
+  private ServerSocket serverSocket;
 
   public ServerConnectionManager(int port, ServerNetworkController serverController) {
     this.port = port;
@@ -38,25 +39,24 @@ public class ServerConnectionManager implements Runnable {
 
   private Socket listenForIncomfingConnections(ServerSocket serverSocket) {
     Logger.log("Listening for connections on port: " + port);
-    Socket socket = null;
+    Socket clientSocket = null;
     try {
-      socket = serverSocket.accept();
+      clientSocket = serverSocket.accept();
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return socket;
+    return clientSocket;
   }
 
   @Override
   public void run() {
 
-    ServerSocket serverSocket;
     Socket clientSocket;
 
     if ((serverSocket = setUpServer(port)) == null)
       return;
 
-    while (Config.getInstance().isNetworkEnabled()) {
+    while (Config.getInstance().isConnected()) {
       clientSocket = listenForIncomfingConnections(serverSocket);
       startNetClientThread(clientSocket);
       String clientIp = clientSocket.getRemoteSocketAddress().toString().split("[/:]")[1];
@@ -65,15 +65,13 @@ public class ServerConnectionManager implements Runnable {
     }
   }
 
-  public void setListening(boolean listening) {
-    this.listening = listening;
-  }
-
   private void startNetClientThread(Socket clientSocket) {
     ServerConnectionIncoming serverConnection = new ServerConnectionIncoming(clientSocket, serverController);
     Thread serverConnectionThread = new Thread(serverConnection);
     serverConnectionThread.start();
   }
 
-
+  public ServerSocket getServerSocket() {
+    return serverSocket;
+  }
 }

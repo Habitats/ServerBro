@@ -51,15 +51,15 @@ public class Config {
   private boolean server;
   private boolean client;
   private Identity id;
-  private boolean networkEnabled = true;
+  private boolean connected = false;
 
   // SERVER
   private int serverPort;
   private boolean loginEnabled;
   private String serverHostname;
 
-  public void setNetworkEnabled(boolean networkEnabled) {
-    this.networkEnabled = networkEnabled;
+  public void setConnected(boolean connected) {
+    this.connected = connected;
   }
 
   public boolean loginEnabled() {
@@ -86,8 +86,8 @@ public class Config {
     return id;
   }
 
-  public boolean isNetworkEnabled() {
-    return networkEnabled;
+  public boolean isConnected() {
+    return connected;
   }
 
 }

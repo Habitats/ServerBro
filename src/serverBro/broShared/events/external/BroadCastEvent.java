@@ -12,17 +12,8 @@ public class BroadCastEvent extends NetworkEvent {
     this.message = message;
   }
 
-
-  @Override
-  public String toString() {
-    return message;
-  }
-
-
   @Override
   public void execute(Controller controller) {
     controller.model.addMessage("Broadcast: " + message);
   }
-
-
 }

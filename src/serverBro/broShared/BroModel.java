@@ -17,9 +17,9 @@ public class BroModel extends Observable {
 
   private List<ComputerProcess> processes;
   private List<String> messages;
-  private String lastMessage;
-  private String networkStatus;
-  private String name;
+  private String lastMessage = "lastMessage not set";
+  private String networkStatus = "networkStatus not set";
+  private String name = "name not set";
 
   public BroModel() {
     messages = new ArrayList<String>();
@@ -42,6 +42,10 @@ public class BroModel extends Observable {
   }
 
   public void addMessage(String message) {
+    if (message.length() == 0) {
+      Logger.log("Trying to add zero length message. Skipping!");
+      return;
+    }
     messages.add(message);
     // keep access to last message for quick access
     lastMessage = message;

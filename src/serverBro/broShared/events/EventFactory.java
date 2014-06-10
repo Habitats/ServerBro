@@ -42,6 +42,5 @@ public class EventFactory {
       viewEvent = new SendButtonEvent();
     }
     return viewEvent;
-
   }
 }

@@ -15,7 +15,7 @@ import serverBro.broShared.view.BroGuiController;
  * 
  */
 public class ServerController extends Controller {
-  private NetworkController networkController;
+  private NetworkController serverController;
   private Authenticator auth;
 
   public ServerController(BroGuiController view) {
@@ -26,14 +26,9 @@ public class ServerController extends Controller {
     auth = new Authenticator();
   }
 
-  public void startServer() {
-    networkController = new ServerNetworkController(this);
-    networkController.connect();
-  }
-
   @Override
   public void incomingEvent(NetworkEvent event) {
-    Logger.log("SERVER CONTROLLER GOT EVENT");
+    Logger.log("Server received: " + event);
     event.setController(this);
 
     if (auth.authenticate(event)) {
@@ -43,25 +38,25 @@ public class ServerController extends Controller {
 
   @Override
   public void sendEvent(NetworkEvent event) {
-    Logger.log("SERVER CONTROLLER SENT EVENT");
-    networkController.sendEvent(event);
+    serverController.sendEvent(event);
   }
 
   @Override
   public void startService() {
-    startServer();
+    serverController = new ServerNetworkController(this);
+    serverController.connect();
   }
 
   @Override
   public void stopService() {
-    networkController.disconnect();
+    Logger.log("Disconnecting server...");
+    serverController.disconnect();
   }
 
   @Override
   public void actionPerformed(ViewEvent viewEvent) {
     viewEvent.execute(this);
   }
-
 
   public Authenticator getAuthenticator() {
     return auth;

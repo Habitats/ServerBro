@@ -11,6 +11,12 @@ import org.apache.commons.io.IOUtils;
 import serverBro.broShared.utilities.ComputerProcess;
 
 
+/**
+ * Data class for information about running processes on server.
+ * 
+ * @author Patrick
+ * 
+ */
 public class ComputerInfo {
   private ArrayList<ComputerProcess> processes;
 

@@ -37,9 +37,8 @@ public class ServerConnectionIncoming implements Runnable {
     NetworkEvent event;
 
     try {
-      while ((event = (NetworkEvent) in.readObject()) != null && Config.getInstance().isNetworkEnabled()) {
+      while ((event = (NetworkEvent) in.readObject()) != null) {
         synchronized (event) {
-          Logger.log("Server received: " + event);
           for (ClientConnection clientConnection : serverController.getClientConnections()) {
             if (clientConnection.getClientSocket() == clientSocket && event.getSender() != null) {
               clientConnection.setIdentity(event.getSender());
@@ -53,7 +52,7 @@ public class ServerConnectionIncoming implements Runnable {
       }
     } catch (Exception e) {
       Logger.log("Client dropped! Cleaning up...");
-      e.printStackTrace();
+      // e.printStackTrace();
     }
     out.close();
     in.close();
@@ -73,7 +72,7 @@ public class ServerConnectionIncoming implements Runnable {
         in.close();
         clientSocket.close();
       } catch (IOException e1) {
-        e1.printStackTrace();
+        // e1.printStackTrace();
       }
     }
   }

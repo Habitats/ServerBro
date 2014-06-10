@@ -38,7 +38,7 @@ public class ConfigLoader {
 
   public static Properties loadConfig() {
 
-    findSystemProperties();
+//    findSystemProperties();
     Properties prop;
     if (System.getProperty("java.vm.specification.vendor").equalsIgnoreCase("The Android Project")) {
       prop = loadConfigAndroid();
@@ -57,7 +57,7 @@ public class ConfigLoader {
     while (keys.hasMoreElements()) {
       String key = (String) keys.nextElement();
       String value = (String) p.get(key);
-      System.out.println(key + " >>>> " + value);
+      Logger.log(key + " >>>> " + value);
     }
   }
 }

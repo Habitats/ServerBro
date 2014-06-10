@@ -20,11 +20,12 @@ public class BroPanel extends JPanel implements Observer {
   private JButton disconnectButton;
   private JButton connectButton;
   private JButton sendButton;
-  private ContinuousFeedArea logFeed;
+  private SwingLogView logFeed;
   private JButton infoButton;
   private JButton broadcastButton;
   private JButton messageButton;
   private BroGuiController broGuiController;
+  private ContinuousFeedArea messageFeed;
 
   public BroPanel(BroGuiController broGuiController) {
     this.broGuiController = broGuiController;
@@ -36,10 +37,11 @@ public class BroPanel extends JPanel implements Observer {
     messageButton = new BroButton(BroGuiConstants.MESSAGE, broGuiController);
 
     statusField = new JTextArea();
-    logFeed = new ContinuousFeedArea();
+    logFeed = new SwingLogView();
+    messageFeed = new ContinuousFeedArea();
 
     setLayout(new GridBagLayout());
-    Dimension dim = new Dimension(500, 500);
+    Dimension dim = new Dimension(500, 200);
     setPreferredSize(dim);
     setMinimumSize(dim);
     setMaximumSize(dim);
@@ -54,7 +56,8 @@ public class BroPanel extends JPanel implements Observer {
     add(broadcastButton, new GBC(4, 0));
     add(messageButton, new GBC(5, 0));
 
-    add(logFeed, new GBC(0, 1).setSpan(10, 2).setWeight(1, 1));
+    add(logFeed, new GBC(0, 1).setSpan(3, 2).setWeight(0.5, 1));
+    add(messageFeed, new GBC(3, 1).setSpan(3, 2).setWeight(0.5, 1));
     add(statusField, new GBC(0, 4).setSpan(10, 2));
   }
 
@@ -62,8 +65,8 @@ public class BroPanel extends JPanel implements Observer {
   public void update(Observable o, Object arg) {
     BroModel model = (BroModel) o;
     statusField.setText(model.getNetworkStatus());
-    logFeed.append(model.getLastMessage() + "\n");
-    logFeed.append(model.getProcesses().toString());
+    messageFeed.append(model.getLastMessage() + "\n");
+    statusField.setText(model.getName());
     // infoField.setText(model.getProcesses().toString());
   }
 }

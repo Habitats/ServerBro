@@ -3,6 +3,12 @@ package serverBro.swing;
 import serverBro.broShared.BroModel;
 import serverBro.broShared.view.BroGuiController;
 
+/**
+ * GUI controller for SWING implementation.
+ * 
+ * @author Patrick
+ * 
+ */
 public class GuiControllerSwing extends BroGuiController {
   private final BroPanel view;
   private final BroFrame frame;

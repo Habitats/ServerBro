@@ -47,7 +47,7 @@ public class ClientIncoming implements Runnable {
 
       NetworkEvent event;
       Logger.log("Initiating streams...");
-      while ((event = (NetworkEvent) in.readObject()) != null && Config.getInstance().isNetworkEnabled()) {
+      while ((event = (NetworkEvent) in.readObject()) != null) {
         synchronized (event) {
           // Singleton.log("Client received: " + event.toString());
           clientController.evaluateIncoming(event);
@@ -63,21 +63,24 @@ public class ClientIncoming implements Runnable {
 
   @Override
   public void run() {
-    while (Config.getInstance().isNetworkEnabled()) {
+    while (Config.getInstance().isConnected()) {
       Socket socket = setUpConnection(port, hostname);
       if (socket != null)
         initConnection(socket);
-
       try {
-        Logger.log("COULDN'T CONNECT, RETRYING!");
-        Thread.sleep(1000);
+        if (!Config.getInstance().isConnected()) {
+          return;
+        }
+        int sleepTime = 1000;
+        Logger.log("Connection failed, retrying in " + sleepTime + " ms!");
+        Thread.sleep(sleepTime);
       } catch (InterruptedException e) {
       }
     }
-    kill();
+
   }
 
-  private void kill() {
+  public void kill() {
     try {
       if (out != null)
         out.close();
@@ -87,9 +90,6 @@ public class ClientIncoming implements Runnable {
         clientSocket.close();
     } catch (IOException e) {
       Logger.log("Couldn't close socket...");
-    } finally {
-      Logger.log("Exiting...");
-      System.exit(0);
     }
   }
 

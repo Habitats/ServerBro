@@ -5,6 +5,7 @@ import java.io.Serializable;
 import serverBro.broShared.Config;
 import serverBro.broShared.Controller;
 import serverBro.broShared.Identity;
+import serverBro.broShared.Logger;
 import serverBro.broShared.events.BroEvent;
 
 /**
@@ -48,5 +49,10 @@ public abstract class NetworkEvent implements Serializable, BroEvent {
 
   public Controller getController() {
     return controller;
+  }
+
+  @Override
+  public String toString() {
+    return getClass().getSimpleName();
   }
 }

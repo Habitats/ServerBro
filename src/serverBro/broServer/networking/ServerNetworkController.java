@@ -1,10 +1,12 @@
 package serverBro.broServer.networking;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import serverBro.broShared.Config;
 import serverBro.broShared.Controller;
+import serverBro.broShared.Logger;
 import serverBro.broShared.NetworkController;
 import serverBro.broShared.events.external.NetworkEvent;
 
@@ -43,17 +45,41 @@ public class ServerNetworkController implements NetworkController {
     serverConnectionManager = new ServerConnectionManager(port, this);
     Thread serverThread = new Thread(serverConnectionManager);
     serverThread.start();
+    Config.getInstance().setConnected(true);
   }
 
   @Override
   public void disconnect() {
-    serverConnectionManager.setListening(false);
+    boolean isRunning = Config.getInstance().isConnected();
+    if (isRunning) {
+      Config.getInstance().setConnected(false);
+      for (ClientConnection clientConnection : clientConnections) {
+        try {
+          Logger.log("Disconnecting " + clientConnection.getIdentity().getUsername());
+          clientConnection.getClientSocket().close();
+          clientConnection.getOut().close();
+        } catch (IOException e) {
+        }
+      }
+      try {
+        Logger.log("Closing server socket...");
+        serverConnectionManager.getServerSocket().close();
+      } catch (IOException e) {
+      }
+      Logger.log("Server disconnected!");
+    } else {
+      Logger.log("Unable to disconnect. Server already offline!");
+    }
   }
 
 
   @Override
   public void sendEvent(NetworkEvent event) {
-    serverConnectionOutgoing.sendEvent(event);
+    if (Config.getInstance().isConnected()) {
+      serverConnectionOutgoing.sendEvent(event);
+    } else {
+      Logger.log("Unable to send network event. Not connected!");
+    }
   }
 
 

@@ -18,6 +18,7 @@ public class BroFrame {
     }
 
     JFrame frame = new JFrame();
+    frame.setAlwaysOnTop(true);
     frame.add(panel);
     frame.setTitle("ServerBro");
     buildFrame(frame);

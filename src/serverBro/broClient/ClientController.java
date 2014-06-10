@@ -1,6 +1,7 @@
 package serverBro.broClient;
 
 import serverBro.broClient.networking.ClientNetworkController;
+import serverBro.broShared.Config;
 import serverBro.broShared.Controller;
 import serverBro.broShared.Logger;
 import serverBro.broShared.NetworkController;
@@ -21,38 +22,28 @@ public class ClientController extends Controller {
     super(view);
   }
 
-  private void startClient() {
-    clientNetworkController = new ClientNetworkController(this);
-    clientNetworkController.connect();
-  }
-
   @Override
   public void incomingEvent(NetworkEvent event) {
-    Logger.log("CLIENT CONTROLLER GOT EVENT");
     event.execute(this);
   }
 
   @Override
   public void sendEvent(NetworkEvent event) {
-    clientNetworkController.sendEvent(event);
+    if (clientNetworkController != null) {
+      clientNetworkController.sendEvent(event);
+    } else {
+      Logger.log("Unable to send event. No connection!");
+    }
   }
 
   @Override
   public void startService() {
-    startClient();
+    clientNetworkController = new ClientNetworkController(this);
+    clientNetworkController.connect();
   }
 
   @Override
   public void stopService() {
-    stopClient();
-  }
-
-
-  private void stopClient() {
-    stopServer();
-  }
-
-  private void stopServer() {
     clientNetworkController.disconnect();
   }
 

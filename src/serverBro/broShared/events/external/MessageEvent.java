@@ -18,7 +18,6 @@ public class MessageEvent extends NetworkEvent {
     return message;
   }
 
-
   @Override
   public void execute(Controller controller) {
     controller.model.addMessage("Message: " + message);
