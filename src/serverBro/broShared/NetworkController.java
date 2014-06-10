@@ -2,6 +2,12 @@ package serverBro.broShared;
 
 import serverBro.broShared.events.external.NetworkEvent;
 
+/**
+ * Controller interface for network controllers.
+ * 
+ * @author Patrick
+ * 
+ */
 public interface NetworkController {
   public void sendEvent(NetworkEvent event);
 

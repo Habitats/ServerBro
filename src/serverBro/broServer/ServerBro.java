@@ -6,7 +6,7 @@ import serverBro.broShared.Controller;
 import serverBro.swing.GuiControllerSwing;
 
 /**
- * Main class for ParserBro
+ * Main class for ServerBro 
  * 
  * @author Patrick Skjennum
  * 

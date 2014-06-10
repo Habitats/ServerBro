@@ -6,6 +6,13 @@ import java.util.Observable;
 
 import serverBro.broShared.utilities.ComputerProcess;
 
+/**
+ * Main data model for the application. Contains information passed between the client and the
+ * server.
+ * 
+ * @author Patrick
+ * 
+ */
 public class BroModel extends Observable {
 
   private List<ComputerProcess> processes;

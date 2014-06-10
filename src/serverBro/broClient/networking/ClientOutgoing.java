@@ -5,9 +5,9 @@ import java.io.IOException;
 import serverBro.broShared.events.external.NetworkEvent;
 
 /**
- * Handles incoming events from server
+ * Handles outgoing communication with the server.
  * 
- * @author anon
+ * @author Patrick
  * 
  */
 public class ClientOutgoing {

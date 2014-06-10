@@ -9,6 +9,12 @@ import serverBro.broShared.Config;
 import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.NetworkEvent;
 
+/**
+ * Handles incoming communication with the server.
+ * 
+ * @author Patrick
+ * 
+ */
 public class ClientIncoming implements Runnable {
   private final String hostname;
   private final int port;

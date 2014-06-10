@@ -7,6 +7,13 @@ import serverBro.broShared.view.BroViewListener;
 
 
 
+/**
+ * Abstract controller implementation for handling incoming and outgoing events, as well as starting
+ * and stopping the application services.
+ * 
+ * @author Patrick
+ * 
+ */
 public abstract class Controller implements BroViewListener {
 
   public final BroView view;

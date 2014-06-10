@@ -8,6 +8,12 @@ import serverBro.broShared.Controller;
 import serverBro.broShared.NetworkController;
 import serverBro.broShared.events.external.NetworkEvent;
 
+/**
+ * The main network controller for the server, handles low level server activities
+ * 
+ * @author Patrick
+ * 
+ */
 public class ServerNetworkController implements NetworkController {
   private ServerConnectionOutgoing serverConnectionOutgoing;
   private List<ClientConnection> clientConnections;

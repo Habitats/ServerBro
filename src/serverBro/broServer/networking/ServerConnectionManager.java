@@ -8,6 +8,12 @@ import serverBro.broShared.Config;
 import serverBro.broShared.Logger;
 
 
+/**
+ * The listening part of the server. It handles, delegates and accepts incoming connections.
+ * 
+ * @author Patrick
+ * 
+ */
 public class ServerConnectionManager implements Runnable {
   private int port;
   private boolean listening;

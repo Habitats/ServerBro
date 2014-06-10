@@ -10,9 +10,10 @@ import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.NetworkEvent;
 
 /**
- * Handles the connection with a single client. Event client gets it's own connection on it's own
- * thread.
+ * Handles the outgoing communication with a single client. Each client has it's own connection on
+ * it's own thread.
  * 
+ * @author Patrick
  */
 public class ServerConnectionIncoming implements Runnable {
 

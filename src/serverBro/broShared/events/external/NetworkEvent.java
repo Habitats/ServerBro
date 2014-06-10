@@ -7,6 +7,12 @@ import serverBro.broShared.Controller;
 import serverBro.broShared.Identity;
 import serverBro.broShared.events.BroEvent;
 
+/**
+ * Abstract implementation of events to be sent between client and server.
+ * 
+ * @author Patrick
+ * 
+ */
 public abstract class NetworkEvent implements Serializable, BroEvent {
   private static final long serialVersionUID = 1L;
   public static final int GLOBAL = 0;

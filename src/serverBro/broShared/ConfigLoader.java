@@ -6,7 +6,14 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Properties;
 
+/**
+ * Configuration loader. Loads a properties file depending on the OS the application runs on.
+ * 
+ * @author Patrick
+ * 
+ */
 public class ConfigLoader {
+  // TODO: fix proper properties loading for android
   private static Properties loadConfigAndroid() {
     Properties p = new Properties();
     p.setProperty("server_port", "1337");
@@ -41,6 +48,9 @@ public class ConfigLoader {
     return prop;
   }
 
+  /**
+   * Method for identifying system properties, IE, which OS is running and so on.
+   */
   public static void findSystemProperties() {
     Properties p = System.getProperties();
     Enumeration keys = p.keys();

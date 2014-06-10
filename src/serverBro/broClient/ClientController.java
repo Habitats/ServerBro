@@ -1,6 +1,5 @@
 package serverBro.broClient;
 
-
 import serverBro.broClient.networking.ClientNetworkController;
 import serverBro.broShared.Controller;
 import serverBro.broShared.Logger;
@@ -10,6 +9,12 @@ import serverBro.broShared.events.internal.ViewEvent;
 import serverBro.broShared.view.BroGuiController;
 import serverBro.broShared.view.BroView;
 
+/**
+ * The main client controller. Handles high level client activities.
+ * 
+ * @author Patrick
+ * 
+ */
 public class ClientController extends Controller {
   private NetworkController clientNetworkController;
 

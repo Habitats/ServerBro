@@ -6,6 +6,12 @@ import java.util.List;
 import serverBro.broShared.Identity;
 import serverBro.broShared.events.external.NetworkEvent;
 
+/**
+ * Manage outgoing communication from the server
+ * 
+ * @author Patrick
+ * 
+ */
 public class ServerConnectionOutgoing {
 
   private final List<ClientConnection> clientConnections;

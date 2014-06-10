@@ -13,6 +13,12 @@ import serverBro.broShared.events.internal.ViewEvent;
 import serverBro.broShared.view.BroGuiConstants;
 
 
+/**
+ * Encapsulation factory for hiding concrete creation of events.
+ * 
+ * @author Patrick
+ * 
+ */
 public class EventFactory {
 
 

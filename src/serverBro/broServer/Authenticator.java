@@ -7,6 +7,12 @@ import serverBro.broShared.Config;
 import serverBro.broShared.Identity;
 import serverBro.broShared.events.external.NetworkEvent;
 
+/**
+ * Authentication services.
+ * 
+ * @author Patrick
+ * 
+ */
 public class Authenticator {
   private Map<String, Identity> authenticatedUsers;
 

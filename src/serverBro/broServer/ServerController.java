@@ -8,6 +8,12 @@ import serverBro.broShared.events.external.NetworkEvent;
 import serverBro.broShared.events.internal.ViewEvent;
 import serverBro.broShared.view.BroGuiController;
 
+/**
+ * The main server controller. Handles high level server activities.
+ * 
+ * @author Patrick
+ * 
+ */
 public class ServerController extends Controller {
   private NetworkController networkController;
   private Authenticator auth;

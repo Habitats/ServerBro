@@ -2,6 +2,12 @@ package serverBro.broShared;
 
 import java.util.Properties;
 
+/**
+ * Handles configutation of the application.
+ * 
+ * @author Patrick
+ * 
+ */
 public class Config {
 
   private static Config instance;
