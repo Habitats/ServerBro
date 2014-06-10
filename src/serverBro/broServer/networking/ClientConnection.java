@@ -7,7 +7,8 @@ import serverBro.broShared.Identity;
 
 
 /**
- * Used to identify the different socket streams. Acts as a link between Identity and the client connection stream.
+ * Used to identify the different socket streams. Acts as a link between Identity and the client
+ * connection stream.
  * 
  * @author Patrick
  */

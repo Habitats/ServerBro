@@ -34,5 +34,6 @@ public abstract class BroGuiController implements BroView {
     this.controller = controller;
   }
 
+  @Override
   public abstract void setModel(BroModel model);
 }

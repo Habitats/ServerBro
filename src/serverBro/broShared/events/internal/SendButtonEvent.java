@@ -8,8 +8,8 @@ public class SendButtonEvent extends ViewEvent {
   @Override
   public void execute(Controller controller) {
     // NetworkEvent event = new MessageEvent("Hello!");
-//    NetworkEvent event = new ProcessEvent();
+    // NetworkEvent event = new ProcessEvent();
 
-//    controller.sendEvent(event);
+    // controller.sendEvent(event);
   }
 }

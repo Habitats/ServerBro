@@ -7,7 +7,6 @@ import serverBro.broShared.NetworkController;
 import serverBro.broShared.events.external.NetworkEvent;
 import serverBro.broShared.events.internal.ViewEvent;
 import serverBro.broShared.view.BroGuiController;
-import serverBro.broShared.view.BroView;
 
 /**
  * The main client controller. Handles high level client activities.

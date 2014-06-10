@@ -1,12 +1,11 @@
 package serverBro.broServer;
 
-import serverBro.broClient.ClientController;
 import serverBro.broShared.Config;
 import serverBro.broShared.Controller;
 import serverBro.swing.GuiControllerSwing;
 
 /**
- * Main class for ServerBro 
+ * Main class for ServerBro
  * 
  * @author Patrick Skjennum
  * 
@@ -25,7 +24,7 @@ public class ServerBro {
       Controller server = new ServerController(new GuiControllerSwing());
     }
     if (Config.getInstance().isClient()) {
-//      Controller client = new ClientController(new GuiControllerSwing());
+      // Controller client = new ClientController(new GuiControllerSwing());
     }
   }
 }

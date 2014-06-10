@@ -12,6 +12,7 @@ public class MessageEvent extends NetworkEvent {
     super(PRIVATE);
     this.message = message;
   }
+
   @Override
   public String toString() {
     return message;

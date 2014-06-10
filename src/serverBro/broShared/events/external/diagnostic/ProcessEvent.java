@@ -11,7 +11,7 @@ public class ProcessEvent extends NetworkEvent {
 
   public ProcessEvent() {
     super();
-//    setProcesses(new ComputerInfo().getRunningProcesses());
+    // setProcesses(new ComputerInfo().getRunningProcesses());
   }
 
   public ArrayList<ComputerProcess> getProcesses() {
