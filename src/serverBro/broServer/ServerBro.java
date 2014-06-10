@@ -1,7 +1,9 @@
-package serverBro.broShared;
+package serverBro.broServer;
 
 import serverBro.broClient.ClientController;
-import serverBro.broServer.ServerController;
+import serverBro.broShared.Config;
+import serverBro.broShared.Controller;
+import serverBro.swing.GuiControllerSwing;
 
 /**
  * Main class for ParserBro
@@ -20,10 +22,10 @@ public class ServerBro {
 
   private void init() {
     if (Config.getInstance().isServer()) {
-      Controller server = new ServerController();
+      Controller server = new ServerController(new GuiControllerSwing());
     }
     if (Config.getInstance().isClient()) {
-      Controller client = new ClientController();
+//      Controller client = new ClientController(new GuiControllerSwing());
     }
   }
 }

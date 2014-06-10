@@ -5,20 +5,13 @@ import java.util.ArrayList;
 import serverBro.broShared.BroModel;
 import serverBro.broShared.events.internal.ViewEvent;
 import serverBro.broShared.utilities.ComputerProcess;
-import serverBro.swing.BroFrame;
-import serverBro.swing.BroPanel;
 
-public class BroGuiController implements BroView {
+public abstract class BroGuiController implements BroView {
 
-  private BroModel model;
-  private BroPanel view;
-  private BroFrame frame;
+  protected BroModel model;
   private BroViewListener controller;
 
-  public BroGuiController() {
-    view = new BroPanel(this);
-    frame = new BroFrame(view);
-  }
+  public BroGuiController() {}
 
   public void actionPerformed(ViewEvent e) {
     controller.actionPerformed(e);
@@ -37,13 +30,9 @@ public class BroGuiController implements BroView {
   }
 
   @Override
-  public void setModel(BroModel model) {
-    model.addObserver(view);
-    this.model = model;
-  }
-
-  @Override
   public void setBroViewListener(BroViewListener controller) {
     this.controller = controller;
   }
+
+  public abstract void setModel(BroModel model);
 }

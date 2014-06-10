@@ -1,8 +1,5 @@
 package serverBro.broShared;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.Properties;
 
 public class Config {
@@ -11,7 +8,7 @@ public class Config {
 
 
   private Config() {
-    properties = loadConfig("ServerBro.properties");
+    properties = ConfigLoader.loadConfig();
     id = new Identity("mrherp");
 
     initCustomConfig();
@@ -32,17 +29,8 @@ public class Config {
     return properties;
   }
 
-  private Properties loadConfig(String path) {
-    properties = new Properties();
-    try {
-      properties.load(new FileInputStream(new File(path)));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    return properties;
-  }
 
-  private Properties properties;
+  private final Properties properties;
 
   // ########### CUSTOM STUFF #######################################
   private void initCustomConfig() {

@@ -13,8 +13,8 @@ import serverBro.broShared.view.BroView;
 public class ClientController extends Controller {
   private NetworkController clientNetworkController;
 
-  public ClientController() {
-    super();
+  public ClientController(BroGuiController view) {
+    super(view);
   }
 
   private void startClient() {
@@ -50,13 +50,6 @@ public class ClientController extends Controller {
 
   private void stopServer() {
     clientNetworkController.disconnect();
-  }
-
-  @Override
-  protected BroView createView() {
-    BroGuiController view = new BroGuiController();
-    view.setBroViewListener(this);
-    return view;
   }
 
   @Override

@@ -14,12 +14,21 @@ public class BroButton extends JButton {
   public BroButton(final String name, final BroGuiController controller) {
     super(name);
     setName(name);
-    addActionListener(new ActionListener() {
+    addActionListener(new BroButtonListener(controller, name));
+  }
 
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        controller.actionPerformed(EventFactory.createViewEvent(name));
-      }
-    });
+  private class BroButtonListener implements ActionListener {
+    private BroGuiController controller;
+    private String name;
+
+    public BroButtonListener(BroGuiController controller, String name) {
+      this.controller = controller;
+      this.name = name;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+      controller.actionPerformed(EventFactory.createViewEvent(name));
+    }
   }
 }

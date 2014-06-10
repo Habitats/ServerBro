@@ -7,14 +7,13 @@ import serverBro.broShared.NetworkController;
 import serverBro.broShared.events.external.NetworkEvent;
 import serverBro.broShared.events.internal.ViewEvent;
 import serverBro.broShared.view.BroGuiController;
-import serverBro.broShared.view.BroView;
 
 public class ServerController extends Controller {
   private NetworkController networkController;
   private Authenticator auth;
 
-  public ServerController() {
-    super();
+  public ServerController(BroGuiController view) {
+    super(view);
 
     model.setName("server");
     model.setNetworkStatus("online!");
@@ -25,14 +24,6 @@ public class ServerController extends Controller {
     networkController = new ServerNetworkController(this);
     networkController.connect();
   }
-
-  @Override
-  protected BroView createView() {
-    BroView broView = new BroGuiController();
-    broView.setBroViewListener(this);
-    return broView;
-  }
-
 
   @Override
   public void incomingEvent(NetworkEvent event) {
