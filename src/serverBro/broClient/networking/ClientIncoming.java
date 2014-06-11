@@ -20,8 +20,8 @@ public class ClientIncoming implements Runnable {
   private final int port;
   private ObjectOutputStream out;
   private ObjectInputStream in;
-  private Socket clientSocket;
   private ClientNetworkController clientController;
+  private Socket clientSocket;
 
   public ClientIncoming(int port, String hostname, ClientNetworkController clientController) {
     this.port = port;
@@ -31,21 +31,21 @@ public class ClientIncoming implements Runnable {
 
   private Socket setUpConnection(int port, String hostname) {
     Logger.log("Connecting to " + hostname + " on port " + port + "...");
+    Socket clientSocket = null;
     try {
       clientSocket = new Socket(hostname, port);
     } catch (IOException e) {
-      Logger.log("Unable to connect...");
+      Logger.error("Unable to connect...",e);
 
-      Config.getInstance().setConnected(false);
     }
     return clientSocket;
   }
 
-  private void initConnection(Socket socket) {
+  private void initConnection(Socket clientSocket) {
     try {
-      ServerConnection serverConnection = new ServerConnection(new ObjectOutputStream(socket.getOutputStream()), socket);
+      ServerConnection serverConnection = new ServerConnection(new ObjectOutputStream(clientSocket.getOutputStream()), clientSocket);
       clientController.setServerConnection(serverConnection);
-      in = new ObjectInputStream(socket.getInputStream());
+      in = new ObjectInputStream(clientSocket.getInputStream());
 
       NetworkEvent event;
       Logger.log("Initiating streams...");
@@ -54,35 +54,38 @@ public class ClientIncoming implements Runnable {
           // Singleton.log("Client received: " + event.toString());
           clientController.evaluateIncoming(event);
 
-          // not sure why this has to be done here
         }
       }
 
     } catch (IOException | ClassNotFoundException e) {
-      Logger.log("Lost connection!");
-      e.printStackTrace();
+      Logger.error("Lost connection", e);
     }
   }
 
   @Override
   public void run() {
     while (Config.getInstance().isConnected()) {
-      Socket socket = setUpConnection(port, hostname);
-      if (socket != null) {
+      clientSocket = setUpConnection(port, hostname);
+      if (clientSocket != null) {
         Logger.log("Client disconnected!");
-        initConnection(socket);
+        initConnection(clientSocket);
       }
       try {
-        if (!Config.getInstance().isConnected()) {
-          return;
+        if (Config.getInstance().isConnected()) {
+          int sleepTime = 1000;
+          Logger.log("Connection failed, retrying in " + sleepTime + " ms!");
+          Thread.sleep(sleepTime);
         }
-        int sleepTime = 1000;
-        Logger.log("Connection failed, retrying in " + sleepTime + " ms!");
-        Thread.sleep(sleepTime);
+        else{
+          break;
+        }
       } catch (InterruptedException e) {
+        Logger.error("Sleep interrupted",e);
       }
     }
 
+    // always clean up your sockets!
+    kill();
   }
 
   public void kill() {
@@ -94,7 +97,9 @@ public class ClientIncoming implements Runnable {
       if (clientSocket != null)
         clientSocket.close();
     } catch (IOException e) {
-      Logger.log("Couldn't close socket...");
+      Logger.error("Couldn't close socket...",e);
+    }finally{
+      Config.getInstance().setConnected(false);
     }
   }
 

@@ -1,5 +1,7 @@
 package serverBro.broShared;
 
+import java.io.IOException;
+
 import serverBro.broShared.view.LogView;
 
 /**
@@ -19,8 +21,9 @@ public class Logger {
     addToLogView(formattedLog);
   }
 
-  public static void error(String string) {
-    String formattedError = String.format("%8d: %s", errorNumber++, string);
+  public static void error(String string, Exception e) {
+    string += ": " + e.toString();
+    String formattedError = String.format("ERR: %4d: %s", errorNumber++, string);
     System.err.println(formattedError);
     addToLogView(formattedError);
   }
@@ -34,4 +37,5 @@ public class Logger {
   public static void setLogView(LogView logView) {
     LOG_VIEW = logView;
   }
+
 }

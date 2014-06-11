@@ -59,7 +59,6 @@ public class ClientNetworkController implements NetworkController {
   public void disconnect() {
     Logger.log("Disconnecting client...");
     clientIncoming.kill();
-    Config.getInstance().setConnected(false);
   }
 
   public BroGuiController getBroController() {

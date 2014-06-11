@@ -38,4 +38,9 @@ public class ClientConnection {
   public void setIdentity(Identity id) {
     this.id = id;
   }
+
+  @Override
+  public String toString() {
+    return id == null ? "NO ID" : id.getUsername();
+  }
 }

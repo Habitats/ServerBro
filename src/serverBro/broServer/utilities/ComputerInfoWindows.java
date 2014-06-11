@@ -23,6 +23,7 @@ import javax.management.ReflectionException;
 
 import org.apache.commons.io.IOUtils;
 
+import serverBro.broShared.Logger;
 import serverBro.broShared.utilities.ComputerInfoInterface;
 import serverBro.broShared.utilities.ComputerProcess;
 import serverBro.broShared.utilities.CpuStats;
@@ -46,10 +47,8 @@ public class ComputerInfoWindows implements ComputerInfoInterface {
       proc = Runtime.getRuntime().exec("tasklist.exe /v");
       InputStream procOutput = proc.getInputStream();
       myString = IOUtils.toString(procOutput, "UTF-8");
-
-      // }
     } catch (IOException e) {
-      e.printStackTrace();
+      Logger.error("Couldn't get running processes", e);
     }
     List<Integer> lengths = new ArrayList<Integer>();
     for (String length : myString.split("\n")[2].split(" ")) {
@@ -112,8 +111,7 @@ public class ComputerInfoWindows implements ComputerInfoInterface {
         name = ObjectName.getInstance("java.lang:type=OperatingSystem");
         list = mbs.getAttributes(name, new String[] {"SystemCpuLoad"});
       } catch (MalformedObjectNameException | NullPointerException | InstanceNotFoundException | ReflectionException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
+        Logger.error("Couldn't get CPU stats", e);
       }
 
       if (list.isEmpty())
@@ -128,6 +126,7 @@ public class ComputerInfoWindows implements ComputerInfoInterface {
       try {
         Thread.sleep(2000);
       } catch (InterruptedException e) {
+        Logger.error("Unable to sleep", e);
       }
 
 
@@ -157,7 +156,6 @@ public class ComputerInfoWindows implements ComputerInfoInterface {
     try {
       uptimeProc = Runtime.getRuntime().exec("net stats srv");
       in = new BufferedReader(new InputStreamReader(uptimeProc.getInputStream()));
-      // TODO Auto-generated catch block
       while ((line = in.readLine()) != null) {
         if (line.startsWith("Statistics since")) {
           // TODO: support for more locales!
@@ -168,7 +166,7 @@ public class ComputerInfoWindows implements ComputerInfoInterface {
         }
       }
     } catch (IOException | ParseException e) {
-      e.printStackTrace();
+      Logger.error("Couldn't get uptime stats", e);
     }
     UptimeStats uptime = new UptimeStats(uptimeInMs);
     return uptime;

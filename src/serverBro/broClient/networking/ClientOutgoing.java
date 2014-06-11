@@ -21,8 +21,7 @@ public class ClientOutgoing {
       serverConnection.getOut().writeObject(event);
       serverConnection.getOut().reset();
     } catch (Exception e) {
-      // e.printStackTrace();
-      Logger.error("Socket write failed!");
+      Logger.error("Socket write failed!",e);
     }
   }
 

@@ -32,7 +32,7 @@ public class ServerConnectionManager implements Runnable {
     try {
       serverSocket = new ServerSocket(port);
     } catch (IOException e) {
-      Logger.log("Server already running! Skipping...");
+      Logger.error("Server already running! Skipping...",e);
     }
     return serverSocket;
   }
@@ -43,7 +43,7 @@ public class ServerConnectionManager implements Runnable {
     try {
       clientSocket = serverSocket.accept();
     } catch (IOException e) {
-      e.printStackTrace();
+      Logger.error("ClientSocket dropped!",e);
     }
     return clientSocket;
   }

@@ -8,15 +8,16 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
+import serverBro.broShared.Logger;
+
 public class BroFrame {
 
   public BroFrame(JPanel panel) {
     try {
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
     } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
-      e.printStackTrace();
+      Logger.error("Unable to set system 'look & feel'", e);
     }
-
     JFrame frame = new JFrame();
     frame.setAlwaysOnTop(true);
     frame.add(panel);

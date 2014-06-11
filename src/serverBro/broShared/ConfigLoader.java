@@ -31,7 +31,7 @@ public class ConfigLoader {
       // properties.load(this.getClass().getClassLoader().getResourceAsStream(path));
       properties.load(new FileInputStream(new File(path)));
     } catch (IOException e) {
-      e.printStackTrace();
+      Logger.error("Unable to load properties", e);
     }
     return properties;
   }

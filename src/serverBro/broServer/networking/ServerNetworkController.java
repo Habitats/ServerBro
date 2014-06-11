@@ -55,16 +55,20 @@ public class ServerNetworkController implements NetworkController {
       Config.getInstance().setConnected(false);
       for (ClientConnection clientConnection : clientConnections) {
         try {
-          Logger.log("Disconnecting " + clientConnection.getIdentity().getUsername());
+          Logger.log("Disconnecting " + (clientConnection.getIdentity() == null ? "unknown" : clientConnection.getIdentity().getUsername()));
           clientConnection.getClientSocket().close();
           clientConnection.getOut().close();
         } catch (IOException e) {
+          Logger.error("Couldn't disconnect client", e);
+        } catch (NullPointerException e) {
+          Logger.error("Coudln't disconnect client, no identity", e);
         }
       }
       try {
         Logger.log("Closing server socket...");
         serverConnectionManager.getServerSocket().close();
       } catch (IOException e) {
+        Logger.error("Couldn't close server socket", e);
       }
       Logger.log("Server disconnected!");
     } else {

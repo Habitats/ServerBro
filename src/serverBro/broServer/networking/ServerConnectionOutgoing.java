@@ -41,7 +41,7 @@ public class ServerConnectionOutgoing {
         }
       }
     } catch (IOException e) {
-      e.printStackTrace();
+      Logger.error("Writing to socket failed. Couldn't return event to sender", e);
     }
   }
 
@@ -51,7 +51,7 @@ public class ServerConnectionOutgoing {
         clientConnection.getOut().writeObject(event);
         clientConnection.getOut().reset();
       } catch (IOException e) {
-        e.printStackTrace();
+      Logger.error("Writing to socket failed. Couldn't broadcast event to " + clientConnection.getIdentity(), e);
       }
     }
   }

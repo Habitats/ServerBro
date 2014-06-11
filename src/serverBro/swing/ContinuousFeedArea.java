@@ -8,6 +8,8 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.Document;
 
+import serverBro.broShared.Logger;
+
 /**
  * A continuous feed area, suitable for a continuous log. It will remove lines from the top when the
  * maximum is reached.
@@ -41,7 +43,7 @@ public class ContinuousFeedArea extends JScrollPane {
       Document doc = pane.getDocument();
       doc.insertString(doc.getLength(), str, null);
     } catch (BadLocationException e) {
-      // e.printStackTrace();
+      Logger.error("Unable to append to scrollpane", e);
     }
   }
 

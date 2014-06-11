@@ -28,9 +28,13 @@ public class ServerConnectionIncoming implements Runnable {
     this.serverController = serverController;
   }
 
-  private void initConnection() throws IOException {
-    out = new ObjectOutputStream(clientSocket.getOutputStream());
-    in = new ObjectInputStream(clientSocket.getInputStream());
+  private void initConnection() {
+    try {
+      out = new ObjectOutputStream(clientSocket.getOutputStream());
+      in = new ObjectInputStream(clientSocket.getInputStream());
+    } catch (IOException e) {
+      Logger.error("Couldn't get socket streams", e);
+    }
     serverController.getClientConnections().add(new ClientConnection(out, clientSocket));
 
     NetworkEvent event;
@@ -50,29 +54,20 @@ public class ServerConnectionIncoming implements Runnable {
         }
       }
     } catch (Exception e) {
-      Logger.log("Client dropped! Cleaning up...");
-       e.printStackTrace();
+      Logger.error("Client dropped! Cleaning up...", e);
     }
-    out.close();
-    in.close();
-    clientSocket.close();
-    // serverController.evaluateIncoming(new AuthEvent());
     serverController.getClientConnections().remove(clientConnection);
   }
 
   @Override
   public void run() {
+    initConnection();
     try {
-      initConnection();
-    } catch (Exception e) {
-      e.printStackTrace();
-      try {
-        out.close();
-        in.close();
-        clientSocket.close();
-      } catch (IOException e1) {
-        // e1.printStackTrace();
-      }
+      out.close();
+      in.close();
+      clientSocket.close();
+    } catch (IOException e) {
+      Logger.error("Couldn't close socket streams", e);
     }
   }
 }

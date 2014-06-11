@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
 
+import serverBro.broShared.Logger;
+
 /**
  * HELPER CLASS FOR DOCUMENTS
  * 
@@ -108,8 +110,8 @@ public class LimitLinesDocumentListener implements DocumentListener {
 
     try {
       document.remove(0, end);
-    } catch (BadLocationException ble) {
-      System.out.println(ble);
+    } catch (BadLocationException e) {
+      Logger.error("Unable to remove from top of scrollpane", e);
     }
   }
 
@@ -126,8 +128,8 @@ public class LimitLinesDocumentListener implements DocumentListener {
 
     try {
       document.remove(start - 1, end - start);
-    } catch (BadLocationException ble) {
-      System.out.println(ble);
+    } catch (BadLocationException e) {
+      Logger.error("Unable to remove from end of scrollpane", e);
     }
   }
 }
