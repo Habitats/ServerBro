@@ -3,7 +3,6 @@ package serverBro.broShared.events.external;
 import java.io.Serializable;
 
 import serverBro.broShared.Config;
-import serverBro.broShared.Controller;
 import serverBro.broShared.Identity;
 import serverBro.broShared.events.BroEvent;
 

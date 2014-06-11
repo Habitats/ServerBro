@@ -1,7 +1,5 @@
 package serverBro.broShared;
 
-import java.io.IOException;
-
 import serverBro.broShared.view.LogView;
 
 /**

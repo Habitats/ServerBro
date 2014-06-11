@@ -26,22 +26,27 @@ public class ComputerInfo implements Serializable, ComputerInfoInterface {
   }
 
 
+  @Override
   public CpuStats getCpuStats() {
     return cpuStats;
   }
 
+  @Override
   public RamStats getRamStats() {
     return ramStats;
   }
 
+  @Override
   public UptimeStats getUptimeStats() {
     return uptimeStats;
   }
 
+  @Override
   public List<ComputerProcess> getRunningProcesses() {
     return runningProcesses;
   }
 
+  @Override
   public List<ComputerProcess> getRunningUserProcesses() {
     return runningUserProcesses;
   }

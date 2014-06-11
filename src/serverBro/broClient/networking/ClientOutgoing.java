@@ -1,7 +1,5 @@
 package serverBro.broClient.networking;
 
-import java.io.IOException;
-
 import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.NetworkEvent;
 
