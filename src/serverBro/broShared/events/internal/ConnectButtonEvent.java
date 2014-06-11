@@ -1,11 +1,19 @@
 package serverBro.broShared.events.internal;
 
+import serverBro.broShared.Config;
 import serverBro.broShared.Controller;
+import serverBro.broShared.Logger;
 
 public class ConnectButtonEvent extends ViewEvent {
 
   @Override
   public void execute(Controller controller) {
-    controller.startService();
+    if(!Config.getInstance().isConnected()){
+      Logger.log("Trying to start service...");
+      controller.startService();
+    }
+    else{
+      Logger.log("Already connected!");
+    }
   }
 }

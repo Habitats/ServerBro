@@ -5,7 +5,6 @@ import java.io.Serializable;
 import serverBro.broShared.Config;
 import serverBro.broShared.Controller;
 import serverBro.broShared.Identity;
-import serverBro.broShared.Logger;
 import serverBro.broShared.events.BroEvent;
 
 /**
@@ -23,8 +22,6 @@ public abstract class NetworkEvent implements Serializable, BroEvent {
   public final Identity senderId;
   private final Identity receiver;
 
-  private Controller controller;
-
   public NetworkEvent() {
     this(PRIVATE);
   }
@@ -41,14 +38,6 @@ public abstract class NetworkEvent implements Serializable, BroEvent {
 
   public Identity getSender() {
     return senderId;
-  }
-
-  public void setController(Controller controller) {
-    this.controller = controller;
-  }
-
-  public Controller getController() {
-    return controller;
   }
 
   @Override

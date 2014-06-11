@@ -5,7 +5,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-import serverBro.broShared.Config;
 import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.NetworkEvent;
 
@@ -52,7 +51,7 @@ public class ServerConnectionIncoming implements Runnable {
       }
     } catch (Exception e) {
       Logger.log("Client dropped! Cleaning up...");
-      // e.printStackTrace();
+       e.printStackTrace();
     }
     out.close();
     in.close();

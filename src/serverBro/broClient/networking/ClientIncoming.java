@@ -35,6 +35,8 @@ public class ClientIncoming implements Runnable {
       clientSocket = new Socket(hostname, port);
     } catch (IOException e) {
       Logger.log("Unable to connect...");
+
+      Config.getInstance().setConnected(false);
     }
     return clientSocket;
   }
@@ -58,6 +60,7 @@ public class ClientIncoming implements Runnable {
 
     } catch (IOException | ClassNotFoundException e) {
       Logger.log("Lost connection!");
+      e.printStackTrace();
     }
   }
 
@@ -65,8 +68,10 @@ public class ClientIncoming implements Runnable {
   public void run() {
     while (Config.getInstance().isConnected()) {
       Socket socket = setUpConnection(port, hostname);
-      if (socket != null)
+      if (socket != null) {
+        Logger.log("Client disconnected!");
         initConnection(socket);
+      }
       try {
         if (!Config.getInstance().isConnected()) {
           return;

@@ -43,14 +43,13 @@ public class ClientNetworkController implements NetworkController {
   public void connect() {
     boolean connected = Config.getInstance().isConnected();
     if (!connected) {
-      clientOutgoing = new ClientOutgoing();
       Config.getInstance().setConnected(true);
+      clientOutgoing = new ClientOutgoing();
       int port = Config.getInstance().getServerPort();
       String hostname = Config.getInstance().getServerHostName();
       clientIncoming = new ClientIncoming(port, hostname, this);
       Thread clientThread = new Thread(clientIncoming);
       clientThread.start();
-      Logger.log("Client disconnected!");
     } else {
       Logger.log("Client already connected, disconnect first!");
     }

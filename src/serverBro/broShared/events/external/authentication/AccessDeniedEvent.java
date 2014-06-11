@@ -11,6 +11,6 @@ public class AccessDeniedEvent extends AuthEvent {
 
   @Override
   public void execute(Controller controller) {
-    getController().model.setNetworkStatus("access denied!");
+    controller.model.setNetworkStatus("access denied!");
   }
 }

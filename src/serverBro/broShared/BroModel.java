@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
-import serverBro.broShared.utilities.ComputerProcess;
+import serverBro.broShared.utilities.ComputerInfo;
 
 /**
  * Main data model for the application. Contains information passed between the client and the
@@ -15,15 +15,14 @@ import serverBro.broShared.utilities.ComputerProcess;
  */
 public class BroModel extends Observable {
 
-  private List<ComputerProcess> processes;
   private List<String> messages;
   private String lastMessage = "lastMessage not set";
   private String networkStatus = "networkStatus not set";
   private String name = "name not set";
+  private ComputerInfo computerInfo;
 
   public BroModel() {
     messages = new ArrayList<String>();
-    processes = new ArrayList<ComputerProcess>();
   }
 
   public void setNetworkStatus(String networkStatus) {
@@ -31,13 +30,13 @@ public class BroModel extends Observable {
     update();
   }
 
-  public void setProcesses(ArrayList<ComputerProcess> processes) {
-    this.processes = processes;
+  public void setName(String name) {
+    this.name = name;
     update();
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setComputerInfo(ComputerInfo computerInfo) {
+    this.computerInfo = computerInfo;
     update();
   }
 
@@ -73,7 +72,7 @@ public class BroModel extends Observable {
     return networkStatus;
   }
 
-  public List<ComputerProcess> getProcesses() {
-    return processes;
+  public ComputerInfo getComputerInfo() {
+    return computerInfo;
   }
 }

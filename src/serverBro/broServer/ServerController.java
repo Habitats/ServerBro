@@ -1,11 +1,13 @@
 package serverBro.broServer;
 
 import serverBro.broServer.networking.ServerNetworkController;
+import serverBro.broServer.utilities.ComputerInfoWindows;
 import serverBro.broShared.Controller;
 import serverBro.broShared.Logger;
 import serverBro.broShared.NetworkController;
 import serverBro.broShared.events.external.NetworkEvent;
 import serverBro.broShared.events.internal.ViewEvent;
+import serverBro.broShared.utilities.ComputerInfo;
 import serverBro.broShared.view.BroGuiController;
 
 /**
@@ -17,6 +19,7 @@ import serverBro.broShared.view.BroGuiController;
 public class ServerController extends Controller {
   private NetworkController serverController;
   private Authenticator auth;
+  private ServerInfoManager serverInfoManager;
 
   public ServerController(BroGuiController view) {
     super(view);
@@ -24,17 +27,19 @@ public class ServerController extends Controller {
     model.setName("server");
     model.setNetworkStatus("online!");
     auth = new Authenticator();
+    serverInfoManager = new ServerInfoManager();
   }
 
   @Override
   public void incomingEvent(NetworkEvent event) {
     Logger.log("Server received: " + event);
-    event.setController(this);
 
     if (auth.authenticate(event)) {
       event.execute(this);
     }
   }
+
+
 
   @Override
   public void sendEvent(NetworkEvent event) {
@@ -60,5 +65,11 @@ public class ServerController extends Controller {
 
   public Authenticator getAuthenticator() {
     return auth;
+  }
+
+  @Override
+  public ComputerInfo generateComputerInfo(NetworkEvent event) {
+    ComputerInfo computerInfo = serverInfoManager.createComputerInfo(event);
+    return computerInfo;
   }
 }

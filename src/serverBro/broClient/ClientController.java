@@ -7,6 +7,7 @@ import serverBro.broShared.Logger;
 import serverBro.broShared.NetworkController;
 import serverBro.broShared.events.external.NetworkEvent;
 import serverBro.broShared.events.internal.ViewEvent;
+import serverBro.broShared.utilities.ComputerInfo;
 import serverBro.broShared.view.BroGuiController;
 
 /**
@@ -29,7 +30,7 @@ public class ClientController extends Controller {
 
   @Override
   public void sendEvent(NetworkEvent event) {
-    if (clientNetworkController != null) {
+    if (clientNetworkController != null && Config.getInstance().isConnected()) {
       clientNetworkController.sendEvent(event);
     } else {
       Logger.log("Unable to send event. No connection!");
@@ -50,5 +51,11 @@ public class ClientController extends Controller {
   @Override
   public void actionPerformed(ViewEvent viewEvent) {
     viewEvent.execute(this);
+  }
+
+  @Override
+  public ComputerInfo generateComputerInfo(NetworkEvent event) {
+    Logger.log("ComputerInfo generation not supported by client");
+    return null;
   }
 }

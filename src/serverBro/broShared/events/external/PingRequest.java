@@ -1,7 +1,6 @@
 package serverBro.broShared.events.external;
 
 import serverBro.broShared.Controller;
-import serverBro.broShared.Identity;
 
 public class PingRequest extends NetworkEvent {
 
@@ -14,7 +13,7 @@ public class PingRequest extends NetworkEvent {
 
   @Override
   public void execute(Controller controller) {
-//    long receivedTime = System.currentTimeMillis();
+    // long receivedTime = System.currentTimeMillis();
     controller.model.addMessage(getSender().getUsername() + ": ping!");
     controller.sendEvent(new PingResponse(sentTime));
   }

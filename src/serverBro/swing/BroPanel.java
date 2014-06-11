@@ -49,12 +49,12 @@ public class BroPanel extends JPanel implements Observer {
     logFeed.setBackground(Color.gray);
     statusField.setBackground(Color.pink);
 
-    add(connectButton, new GBC(0, 0));
-    add(disconnectButton, new GBC(1, 0));
-    add(sendButton, new GBC(2, 0));
-    add(infoButton, new GBC(3, 0));
-    add(broadcastButton, new GBC(4, 0));
-    add(messageButton, new GBC(5, 0));
+    add(connectButton, new GBC(0, 0).setWeight(.2, 0));
+    add(disconnectButton, new GBC(1, 0).setWeight(.2, 0));
+    add(sendButton, new GBC(2, 0).setWeight(.2, 0));
+    add(infoButton, new GBC(3, 0).setWeight(.2, 0));
+    add(broadcastButton, new GBC(4, 0).setWeight(.2, 0));
+    add(messageButton, new GBC(5, 0).setWeight(.2, 0));
 
     add(logFeed, new GBC(0, 1).setSpan(3, 2).setWeight(0.5, 1));
     add(messageFeed, new GBC(3, 1).setSpan(3, 2).setWeight(0.5, 1));

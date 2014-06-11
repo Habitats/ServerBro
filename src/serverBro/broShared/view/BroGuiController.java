@@ -1,10 +1,7 @@
 package serverBro.broShared.view;
 
-import java.util.ArrayList;
-
 import serverBro.broShared.BroModel;
 import serverBro.broShared.events.internal.ViewEvent;
-import serverBro.broShared.utilities.ComputerProcess;
 
 public abstract class BroGuiController implements BroView {
 
@@ -20,10 +17,6 @@ public abstract class BroGuiController implements BroView {
   public void setName(String name) {
     model.setName(name);
   }
-
-  public void displayProcesses(ArrayList<ComputerProcess> processes) {
-    model.setProcesses(processes);
-  };
 
   public void displayNetworkStatus(String status) {
     model.setNetworkStatus(status);
