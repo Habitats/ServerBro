@@ -41,6 +41,6 @@ public class ClientConnection {
 
   @Override
   public String toString() {
-    return id == null ? "NO ID" : id.getUsername();
+    return id == null ? "NO_ID" : id.getUsername();
   }
 }

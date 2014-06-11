@@ -51,7 +51,7 @@ public class ServerConnectionOutgoing {
         clientConnection.getOut().writeObject(event);
         clientConnection.getOut().reset();
       } catch (IOException e) {
-      Logger.error("Writing to socket failed. Couldn't broadcast event to " + clientConnection.getIdentity(), e);
+      Logger.error("Writing to socket failed. Couldn't broadcast event to " + clientConnection.toString(), e);
       }
     }
   }

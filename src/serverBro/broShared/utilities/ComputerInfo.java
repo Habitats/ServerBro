@@ -1,6 +1,7 @@
 package serverBro.broShared.utilities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,6 +18,12 @@ public class ComputerInfo implements Serializable, ComputerInfoInterface {
   private RamStats ramStats;
   private List<ComputerProcess> runningProcesses;
   private List<ComputerProcess> runningUserProcesses;
+
+  private List<String> simpleInfoList;
+
+  public ComputerInfo() {
+    simpleInfoList = new ArrayList<String>();
+  }
 
 
   public CpuStats getCpuStats() {
@@ -41,10 +48,12 @@ public class ComputerInfo implements Serializable, ComputerInfoInterface {
 
   public void setCpuStats(CpuStats cpuStats) {
     this.cpuStats = cpuStats;
+    simpleInfoList.add(cpuStats.toString());
   }
 
   public void setRamStats(RamStats ramStats) {
     this.ramStats = ramStats;
+    simpleInfoList.add(ramStats.toString());
   }
 
   public void setRunningProcesses(List<ComputerProcess> runningProcesses) {
@@ -57,5 +66,10 @@ public class ComputerInfo implements Serializable, ComputerInfoInterface {
 
   public void setUptimeStats(UptimeStats uptimeStats) {
     this.uptimeStats = uptimeStats;
+    simpleInfoList.add(uptimeStats.toString());
+  }
+
+  public ArrayList<String> getSimpleInfoList() {
+    return (ArrayList<String>) simpleInfoList;
   }
 }

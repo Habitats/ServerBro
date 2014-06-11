@@ -32,7 +32,7 @@ public class ServerConnectionManager implements Runnable {
     try {
       serverSocket = new ServerSocket(port);
     } catch (IOException e) {
-      Logger.error("Server already running! Skipping...",e);
+      Logger.error("Server already running! Skipping...", e);
     }
     return serverSocket;
   }
@@ -43,7 +43,7 @@ public class ServerConnectionManager implements Runnable {
     try {
       clientSocket = serverSocket.accept();
     } catch (IOException e) {
-      Logger.error("ClientSocket dropped!",e);
+      Logger.error("ClientSocket dropped!", e);
     }
     return clientSocket;
   }
@@ -58,10 +58,12 @@ public class ServerConnectionManager implements Runnable {
 
     while (Config.getInstance().isConnected()) {
       clientSocket = listenForIncomfingConnections(serverSocket);
-      startNetClientThread(clientSocket);
-      String clientIp = clientSocket.getRemoteSocketAddress().toString().split("[/:]")[1];
-      String localPort = clientSocket.getRemoteSocketAddress().toString().split("[/:]")[2];
-      Logger.log("New client with IP: " + clientIp + " and local port: " + localPort);
+      if (clientSocket != null) {
+        startNetClientThread(clientSocket);
+        String clientIp = clientSocket.getRemoteSocketAddress().toString().split("[/:]")[1];
+        String localPort = clientSocket.getRemoteSocketAddress().toString().split("[/:]")[2];
+        Logger.log("New client with IP: " + clientIp + " and local port: " + localPort);
+      }
     }
   }
 

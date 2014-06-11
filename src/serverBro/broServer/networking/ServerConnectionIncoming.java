@@ -63,9 +63,15 @@ public class ServerConnectionIncoming implements Runnable {
   public void run() {
     initConnection();
     try {
-      out.close();
-      in.close();
-      clientSocket.close();
+      if (out != null) {
+        out.close();
+      }
+      if (in != null) {
+        in.close();
+      }
+      if (clientSocket != null) {
+        clientSocket.close();
+      }
     } catch (IOException e) {
       Logger.error("Couldn't close socket streams", e);
     }

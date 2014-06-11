@@ -3,6 +3,7 @@ package serverBro.broClient.networking;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import serverBro.broShared.Config;
@@ -33,9 +34,11 @@ public class ClientIncoming implements Runnable {
     Logger.log("Connecting to " + hostname + " on port " + port + "...");
     Socket clientSocket = null;
     try {
-      clientSocket = new Socket(hostname, port);
+      clientSocket = new Socket();
+      int timeOutInMs = 1000;
+      clientSocket.connect(new InetSocketAddress(hostname, port), timeOutInMs);
     } catch (IOException e) {
-      Logger.error("Unable to connect...",e);
+      Logger.error("Unable to connect...", e);
 
     }
     return clientSocket;
@@ -75,12 +78,11 @@ public class ClientIncoming implements Runnable {
           int sleepTime = 1000;
           Logger.log("Connection failed, retrying in " + sleepTime + " ms!");
           Thread.sleep(sleepTime);
-        }
-        else{
+        } else {
           break;
         }
       } catch (InterruptedException e) {
-        Logger.error("Sleep interrupted",e);
+        Logger.error("Sleep interrupted", e);
       }
     }
 
@@ -89,6 +91,7 @@ public class ClientIncoming implements Runnable {
   }
 
   public void kill() {
+    Logger.log("Killing client connection");
     try {
       if (out != null)
         out.close();
@@ -97,9 +100,8 @@ public class ClientIncoming implements Runnable {
       if (clientSocket != null)
         clientSocket.close();
     } catch (IOException e) {
-      Logger.error("Couldn't close socket...",e);
-    }finally{
-      Config.getInstance().setConnected(false);
+      Logger.error("Couldn't close socket...", e);
+    } finally {
     }
   }
 

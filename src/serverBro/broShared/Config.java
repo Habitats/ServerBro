@@ -58,7 +58,7 @@ public class Config {
   private boolean loginEnabled;
   private String serverHostname;
 
-  public void setConnected(boolean connected) {
+  public synchronized void setConnected(boolean connected) {
     this.connected = connected;
   }
 
@@ -86,7 +86,7 @@ public class Config {
     return id;
   }
 
-  public boolean isConnected() {
+  public synchronized boolean isConnected() {
     return connected;
   }
 
