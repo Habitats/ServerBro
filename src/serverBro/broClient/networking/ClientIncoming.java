@@ -3,10 +3,12 @@ package serverBro.broClient.networking;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
 import serverBro.broShared.Config;
+import serverBro.broShared.CryptoManager;
 import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.NetworkEvent;
 
@@ -50,12 +52,17 @@ public class ClientIncoming implements Runnable {
       clientController.setServerConnection(serverConnection);
       in = new ObjectInputStream(clientSocket.getInputStream());
 
-      NetworkEvent event;
+      Serializable serializable = null;
+      NetworkEvent event = null;
       Logger.log("Initiating streams...");
-      while ((event = (NetworkEvent) in.readObject()) != null) {
+      while ((serializable = (Serializable) in.readObject()) != null) {
+        if (Config.getInstance().encryptionEnabled()) {
+          serializable = CryptoManager.getInstance().decryptNetworkEvent(serializable);
+        }
+        event = (NetworkEvent) serializable;
         synchronized (event) {
           // Singleton.log("Client received: " + event.toString());
-          clientController.evaluateIncoming(event);
+          clientController.evaluateIncoming((NetworkEvent) event);
 
         }
       }

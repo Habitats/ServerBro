@@ -1,6 +1,14 @@
 package serverBro.broShared;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.security.Key;
 import java.util.Properties;
+
+import javax.crypto.SecretKey;
 
 /**
  * Handles configutation of the application.
@@ -14,10 +22,8 @@ public class Config {
 
 
   private Config() {
-    properties = ConfigLoader.loadConfig();
     id = new Identity("mrherp");
-
-    initCustomConfig();
+    properties = new Properties();
   }
 
   // ########### SINGLETON #######################################
@@ -33,6 +39,35 @@ public class Config {
   // ########### INIT CONFIG #######################################
   public Properties getProperties() {
     return properties;
+  }
+
+  public void loadProperties(String path) {
+    try {
+      loadProperties(new FileInputStream(new File(path)));
+    } catch (FileNotFoundException e) {
+      Logger.error("Unable to create fileInputStream", e);
+    }
+  }
+
+  public void loadProperties(InputStream in) {
+    try {
+      properties.load(in);
+    } catch (IOException e) {
+      Logger.error("Unable to load properties", e);
+    }
+    initCustomConfig();
+  }
+
+  public void loadSecretKey(String path) {
+    try {
+      loadSecretKey(new FileInputStream(new File(path)));
+    } catch (FileNotFoundException e) {
+      Logger.error("Unable to load secretKey from disk", e);
+    }
+  }
+
+  public void loadSecretKey(InputStream in) {
+    key = (SecretKey) Serializer.getInstance().deserialize(in);
   }
 
 
@@ -52,6 +87,8 @@ public class Config {
   private boolean client;
   private Identity id;
   private boolean connected = false;
+  private boolean encryptionEnabled = true;
+  private Key key;
 
   // SERVER
   private int serverPort;
@@ -88,6 +125,13 @@ public class Config {
 
   public synchronized boolean isConnected() {
     return connected;
+  }
+
+  public boolean encryptionEnabled() {
+    return encryptionEnabled;
+  }
+  public Key getSecretKey() {
+    return key;
   }
 
 }

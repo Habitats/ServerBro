@@ -1,8 +1,11 @@
 package serverBro.broServer.networking;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
+import serverBro.broShared.Config;
+import serverBro.broShared.CryptoManager;
 import serverBro.broShared.Identity;
 import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.NetworkEvent;
@@ -31,11 +34,14 @@ public class ServerConnectionOutgoing {
     }
   }
 
-  public void returnEventToSender(NetworkEvent event) {
-    Identity sender = event.getSender();
+  public void returnEventToSender(Serializable event) {
+    Identity sender = ((NetworkEvent) event).getSender();
     try {
       for (ClientConnection clientConnection : clientConnections) {
         if (clientConnection.getIdentity() != null && clientConnection.getIdentity().getUsername().toLowerCase().equals(sender.getUsername().toLowerCase())) {
+          if (Config.getInstance().encryptionEnabled()) {
+            event = CryptoManager.getInstance().encryptNetworkEvent(event);
+          }
           clientConnection.getOut().writeObject(event);
           clientConnection.getOut().reset();
         }
@@ -45,13 +51,16 @@ public class ServerConnectionOutgoing {
     }
   }
 
-  public void broadcastNetworkEvent(NetworkEvent event) {
+  public void broadcastNetworkEvent(Serializable event) {
     for (ClientConnection clientConnection : clientConnections) {
       try {
+        if (Config.getInstance().encryptionEnabled()) {
+          event = CryptoManager.getInstance().encryptNetworkEvent(event);
+        }
         clientConnection.getOut().writeObject(event);
         clientConnection.getOut().reset();
       } catch (IOException e) {
-      Logger.error("Writing to socket failed. Couldn't broadcast event to " + clientConnection.toString(), e);
+        Logger.error("Writing to socket failed. Couldn't broadcast event to " + clientConnection.toString(), e);
       }
     }
   }

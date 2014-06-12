@@ -3,14 +3,13 @@ package serverBro.broShared.utilities;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
-public class UptimeStats implements Serializable{
+public class UptimeStats implements Serializable {
 
   private long uptimeInMs;
 
   public UptimeStats(long uptimeInMs) {
     this.uptimeInMs = uptimeInMs;
   }
-
 
   private String formatMs(long ms) {
     long days = TimeUnit.MILLISECONDS.toDays(ms);
@@ -31,6 +30,6 @@ public class UptimeStats implements Serializable{
 
   @Override
   public String toString() {
-    return "System uptime: " + formatMs(uptimeInMs);
+    return "Uptime: " + formatMs(uptimeInMs);
   }
 }

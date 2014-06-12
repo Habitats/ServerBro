@@ -1,5 +1,6 @@
 package serverBro;
 
+import serverBro.broClient.ClientController;
 import serverBro.broServer.ServerController;
 import serverBro.broShared.Config;
 import serverBro.broShared.Controller;
@@ -21,11 +22,14 @@ public class ServerBro {
   }
 
   private void init() {
+    Config.getInstance().loadProperties("serverbro.properties");
+    Config.getInstance().loadSecretKey("secret_key");
+
     if (Config.getInstance().isServer()) {
       Controller server = new ServerController(new GuiControllerSwing());
     }
     if (Config.getInstance().isClient()) {
-      // Controller client = new ClientController(new GuiControllerSwing());
+//       Controller client = new ClientController(new GuiControllerSwing());
     }
   }
 }

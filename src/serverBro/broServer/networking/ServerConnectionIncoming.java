@@ -3,8 +3,11 @@ package serverBro.broServer.networking;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 
+import serverBro.broShared.Config;
+import serverBro.broShared.CryptoManager;
 import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.NetworkEvent;
 
@@ -37,11 +40,16 @@ public class ServerConnectionIncoming implements Runnable {
     }
     serverController.getClientConnections().add(new ClientConnection(out, clientSocket));
 
-    NetworkEvent event;
+    Serializable serializable = null;
+    NetworkEvent event = null;
 
     try {
-      while ((event = (NetworkEvent) in.readObject()) != null) {
-        synchronized (event) {
+      while ((serializable = (Serializable) in.readObject()) != null) {
+        synchronized (serializable) {
+          if(Config.getInstance().encryptionEnabled()){
+            serializable = CryptoManager.getInstance().decryptNetworkEvent(serializable);
+          }
+          event = (NetworkEvent) serializable;
           for (ClientConnection clientConnection : serverController.getClientConnections()) {
             if (clientConnection.getClientSocket() == clientSocket && event.getSender() != null) {
               clientConnection.setIdentity(event.getSender());
