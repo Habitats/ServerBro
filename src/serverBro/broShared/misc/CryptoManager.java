@@ -1,7 +1,6 @@
-package serverBro.broShared;
+package serverBro.broShared.misc;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.security.InvalidKeyException;
 import java.security.Key;

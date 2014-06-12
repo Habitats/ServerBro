@@ -7,10 +7,10 @@ import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
-import serverBro.broShared.Config;
-import serverBro.broShared.CryptoManager;
-import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.NetworkEvent;
+import serverBro.broShared.misc.Config;
+import serverBro.broShared.misc.CryptoManager;
+import serverBro.broShared.misc.Logger;
 
 /**
  * Handles incoming communication with the server.
@@ -62,7 +62,7 @@ public class ClientIncoming implements Runnable {
         event = (NetworkEvent) serializable;
         synchronized (event) {
           // Singleton.log("Client received: " + event.toString());
-          clientController.evaluateIncoming((NetworkEvent) event);
+          clientController.evaluateIncoming(event);
 
         }
       }

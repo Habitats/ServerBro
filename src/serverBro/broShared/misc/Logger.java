@@ -1,4 +1,4 @@
-package serverBro.broShared;
+package serverBro.broShared.misc;
 
 import serverBro.broShared.view.LogView;
 

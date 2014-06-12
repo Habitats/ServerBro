@@ -1,10 +1,10 @@
 package serverBro.broClient.networking;
 
-import serverBro.broShared.Config;
 import serverBro.broShared.Controller;
-import serverBro.broShared.Logger;
 import serverBro.broShared.NetworkController;
 import serverBro.broShared.events.external.NetworkEvent;
+import serverBro.broShared.misc.Config;
+import serverBro.broShared.misc.Logger;
 import serverBro.broShared.view.BroGuiController;
 
 public class ClientNetworkController implements NetworkController {

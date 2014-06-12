@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-import serverBro.broShared.Config;
-import serverBro.broShared.Logger;
+import serverBro.broShared.misc.Config;
+import serverBro.broShared.misc.Logger;
 
 
 /**

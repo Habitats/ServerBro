@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-import serverBro.broShared.Config;
-import serverBro.broShared.CryptoManager;
 import serverBro.broShared.Identity;
-import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.NetworkEvent;
+import serverBro.broShared.misc.Config;
+import serverBro.broShared.misc.CryptoManager;
+import serverBro.broShared.misc.Logger;
 
 /**
  * Manage outgoing communication from the server

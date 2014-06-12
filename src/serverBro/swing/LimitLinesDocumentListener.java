@@ -4,7 +4,7 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
 
-import serverBro.broShared.Logger;
+import serverBro.broShared.misc.Logger;
 
 /**
  * HELPER CLASS FOR DOCUMENTS

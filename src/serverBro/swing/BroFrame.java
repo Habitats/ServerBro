@@ -8,7 +8,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
-import serverBro.broShared.Logger;
+import serverBro.broShared.misc.Logger;
 
 public class BroFrame {
 

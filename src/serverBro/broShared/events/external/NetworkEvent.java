@@ -2,9 +2,9 @@ package serverBro.broShared.events.external;
 
 import java.io.Serializable;
 
-import serverBro.broShared.Config;
 import serverBro.broShared.Identity;
 import serverBro.broShared.events.BroEvent;
+import serverBro.broShared.misc.Config;
 
 /**
  * Abstract implementation of events to be sent between client and server.

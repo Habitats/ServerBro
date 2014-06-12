@@ -1,6 +1,6 @@
 package serverBro.swing;
 
-import serverBro.broShared.Logger;
+import serverBro.broShared.misc.Logger;
 import serverBro.broShared.view.LogView;
 
 public class SwingLogView extends ContinuousFeedArea implements LogView {

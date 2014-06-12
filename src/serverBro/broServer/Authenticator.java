@@ -3,9 +3,9 @@ package serverBro.broServer;
 import java.util.HashMap;
 import java.util.Map;
 
-import serverBro.broShared.Config;
 import serverBro.broShared.Identity;
 import serverBro.broShared.events.external.NetworkEvent;
+import serverBro.broShared.misc.Config;
 
 /**
  * Authentication services.

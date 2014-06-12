@@ -2,10 +2,9 @@ package serverBro.broClient.networking;
 
 import java.io.Serializable;
 
-import serverBro.broShared.Config;
-import serverBro.broShared.CryptoManager;
-import serverBro.broShared.Logger;
-import serverBro.broShared.events.external.NetworkEvent;
+import serverBro.broShared.misc.Config;
+import serverBro.broShared.misc.CryptoManager;
+import serverBro.broShared.misc.Logger;
 
 /**
  * Handles outgoing communication with the server.

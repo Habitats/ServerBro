@@ -6,10 +6,10 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 
-import serverBro.broShared.Config;
-import serverBro.broShared.CryptoManager;
-import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.NetworkEvent;
+import serverBro.broShared.misc.Config;
+import serverBro.broShared.misc.CryptoManager;
+import serverBro.broShared.misc.Logger;
 
 /**
  * Handles the outgoing communication with a single client. Each client has it's own connection on
@@ -46,7 +46,7 @@ public class ServerConnectionIncoming implements Runnable {
     try {
       while ((serializable = (Serializable) in.readObject()) != null) {
         synchronized (serializable) {
-          if(Config.getInstance().encryptionEnabled()){
+          if (Config.getInstance().encryptionEnabled()) {
             serializable = CryptoManager.getInstance().decryptNetworkEvent(serializable);
           }
           event = (NetworkEvent) serializable;

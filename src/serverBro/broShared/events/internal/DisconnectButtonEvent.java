@@ -1,9 +1,9 @@
 package serverBro.broShared.events.internal;
 
-import serverBro.broShared.Config;
 import serverBro.broShared.Controller;
-import serverBro.broShared.Logger;
 import serverBro.broShared.events.external.BroadCastEvent;
+import serverBro.broShared.misc.Config;
+import serverBro.broShared.misc.Logger;
 
 
 public class DisconnectButtonEvent extends ViewEvent {

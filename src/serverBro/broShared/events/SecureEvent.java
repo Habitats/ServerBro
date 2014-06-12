@@ -11,7 +11,7 @@ public class SecureEvent extends SealedObject {
 
   public SecureEvent(Serializable object, Cipher c) throws IOException, IllegalBlockSizeException {
     super(object, c);
-    
+
     // TODO Auto-generated constructor stub
   }
 }

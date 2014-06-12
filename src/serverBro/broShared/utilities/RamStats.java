@@ -2,7 +2,7 @@ package serverBro.broShared.utilities;
 
 import java.io.Serializable;
 
-public class RamStats implements Serializable{
+public class RamStats implements Serializable {
 
   private long freeRam;
   private long totalRam;

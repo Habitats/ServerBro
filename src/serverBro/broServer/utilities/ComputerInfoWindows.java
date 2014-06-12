@@ -23,7 +23,7 @@ import javax.management.ReflectionException;
 
 import org.apache.commons.io.IOUtils;
 
-import serverBro.broShared.Logger;
+import serverBro.broShared.misc.Logger;
 import serverBro.broShared.utilities.ComputerInfoInterface;
 import serverBro.broShared.utilities.ComputerProcess;
 import serverBro.broShared.utilities.CpuStats;

@@ -8,7 +8,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.Document;
 
-import serverBro.broShared.Logger;
+import serverBro.broShared.misc.Logger;
 
 /**
  * A continuous feed area, suitable for a continuous log. It will remove lines from the top when the

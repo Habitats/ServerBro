@@ -1,4 +1,4 @@
-package serverBro.broShared;
+package serverBro.broShared.misc;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +9,8 @@ import java.security.Key;
 import java.util.Properties;
 
 import javax.crypto.SecretKey;
+
+import serverBro.broShared.Identity;
 
 /**
  * Handles configutation of the application.
@@ -130,6 +132,7 @@ public class Config {
   public boolean encryptionEnabled() {
     return encryptionEnabled;
   }
+
   public Key getSecretKey() {
     return key;
   }

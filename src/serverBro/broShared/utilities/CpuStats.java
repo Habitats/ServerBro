@@ -2,7 +2,7 @@ package serverBro.broShared.utilities;
 
 import java.io.Serializable;
 
-public class CpuStats implements Serializable{
+public class CpuStats implements Serializable {
 
   private double cpuLoad;
 
