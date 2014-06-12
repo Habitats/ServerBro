@@ -24,7 +24,7 @@ public class Config {
 
 
   private Config() {
-    id = new Identity("mrherp");
+    id = new Identity("mrherp","derp");
     properties = new Properties();
   }
 
@@ -137,4 +137,15 @@ public class Config {
     return key;
   }
 
+  public void setId(Identity identity) {
+    this.id = identity;
+  }
+
+  public void setServerPort(int serverPort) {
+    this.serverPort = serverPort;
+  }
+
+  public void setServerHostname(String serverHostname) {
+    this.serverHostname = serverHostname;
+  }
 }

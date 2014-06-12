@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import serverBro.broShared.events.external.MessageEvent;
 import serverBro.broShared.events.external.NetworkEvent;
 import serverBro.broShared.misc.Config;
 import serverBro.broShared.misc.CryptoManager;
@@ -37,7 +38,7 @@ public class ClientIncoming implements Runnable {
     Socket clientSocket = null;
     try {
       clientSocket = new Socket();
-      int timeOutInMs = 1000;
+      int timeOutInMs = 5000;
       clientSocket.connect(new InetSocketAddress(hostname, port), timeOutInMs);
     } catch (IOException e) {
       Logger.error("Unable to connect...", e);
@@ -55,6 +56,9 @@ public class ClientIncoming implements Runnable {
       Serializable serializable = null;
       NetworkEvent event = null;
       Logger.log("Initiating streams...");
+      
+      // handshake sorta thing
+      clientController.sendEvent(new MessageEvent("hello server"));
       while ((serializable = (Serializable) in.readObject()) != null) {
         if (Config.getInstance().encryptionEnabled()) {
           serializable = CryptoManager.getInstance().decryptNetworkEvent(serializable);
@@ -77,12 +81,12 @@ public class ClientIncoming implements Runnable {
     while (Config.getInstance().isConnected()) {
       clientSocket = setUpConnection(port, hostname);
       if (clientSocket != null) {
-        Logger.log("Client disconnected!");
+        Logger.log("Client connected!");
         initConnection(clientSocket);
       }
       try {
         if (Config.getInstance().isConnected()) {
-          int sleepTime = 1000;
+          int sleepTime = 2000;
           Logger.log("Connection failed, retrying in " + sleepTime + " ms!");
           Thread.sleep(sleepTime);
         } else {

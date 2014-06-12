@@ -4,6 +4,7 @@ import serverBro.broServer.networking.ServerNetworkController;
 import serverBro.broShared.Controller;
 import serverBro.broShared.NetworkController;
 import serverBro.broShared.events.external.NetworkEvent;
+import serverBro.broShared.events.external.authentication.AccessDeniedEvent;
 import serverBro.broShared.events.internal.ViewEvent;
 import serverBro.broShared.misc.Logger;
 import serverBro.broShared.utilities.ComputerInfo;
@@ -35,6 +36,10 @@ public class ServerController extends Controller {
 
     if (auth.authenticate(event)) {
       event.execute(this);
+    }
+    else{
+      NetworkEvent accessDenied = new AccessDeniedEvent(event.getSender());
+      sendEvent(accessDenied);
     }
   }
 

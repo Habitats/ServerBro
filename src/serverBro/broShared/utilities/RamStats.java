@@ -17,6 +17,6 @@ public class RamStats implements Serializable {
   @Override
   public String toString() {
     int toMb = (int) Math.pow(1024, 2);
-    return "RAM usage: " + usedRam / toMb + "/" + totalRam / toMb;
+    return "RAM usage: " + usedRam / toMb + "/" + totalRam / toMb +" MB";
   }
 }

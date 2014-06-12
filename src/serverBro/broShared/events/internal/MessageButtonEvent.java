@@ -13,6 +13,5 @@ public class MessageButtonEvent extends ViewEvent {
     if (Config.getInstance().isConnected()) {
 
     }
-    controller.sendEvent(new PingRequest());
   }
 }
