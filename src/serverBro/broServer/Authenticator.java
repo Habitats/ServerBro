@@ -5,7 +5,6 @@ import java.util.Map;
 
 import serverBro.broShared.Identity;
 import serverBro.broShared.events.external.NetworkEvent;
-import serverBro.broShared.misc.Config;
 
 /**
  * Authentication services.
@@ -19,14 +18,14 @@ public class Authenticator {
   public Authenticator() {
     loadTrustedIdentities();
   }
-  
-  public Map<String, Identity> loadTrustedIdentities(){
+
+  public Map<String, Identity> loadTrustedIdentities() {
     authenticatedUsers = new HashMap<String, Identity>();
     Identity herp = new Identity("mrherp", "dicks");
     Identity hab = new Identity("habitats", "dicks");
-    authenticatedUsers.put(herp.getUsername(),herp);
+    authenticatedUsers.put(herp.getUsername(), herp);
     authenticatedUsers.put(hab.getUsername(), hab);
-    
+
     return authenticatedUsers;
   }
 

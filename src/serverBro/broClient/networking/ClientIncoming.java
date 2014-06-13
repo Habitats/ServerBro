@@ -56,7 +56,7 @@ public class ClientIncoming implements Runnable {
       Serializable serializable = null;
       NetworkEvent event = null;
       Logger.log("Initiating streams...");
-      
+
       // handshake sorta thing
       clientController.sendEvent(new MessageEvent("hello server"));
       while ((serializable = (Serializable) in.readObject()) != null) {

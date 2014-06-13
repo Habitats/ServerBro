@@ -11,11 +11,11 @@ public class MessageEvent extends NetworkEvent {
   public final String message;
 
   public MessageEvent(String message) {
-    this(message,Config.getInstance().getId());
+    this(message, Config.getInstance().getId());
   }
 
   public MessageEvent(String message, Identity sender) {
-    super(PRIVATE,sender);
+    super(PRIVATE, sender);
     this.message = message;
   }
 

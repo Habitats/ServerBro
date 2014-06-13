@@ -35,8 +35,7 @@ public class ServerController extends Controller {
 
     if (auth.authenticate(event)) {
       event.execute(this);
-    }
-    else{
+    } else {
       NetworkEvent accessDenied = new AccessDeniedEvent(event.getSender());
       sendEvent(accessDenied);
     }

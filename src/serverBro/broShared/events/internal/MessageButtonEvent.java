@@ -1,7 +1,6 @@
 package serverBro.broShared.events.internal;
 
 import serverBro.broShared.Controller;
-import serverBro.broShared.events.external.PingRequest;
 import serverBro.broShared.misc.Config;
 
 
