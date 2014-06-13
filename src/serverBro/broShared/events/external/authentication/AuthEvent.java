@@ -23,10 +23,4 @@ public abstract class AuthEvent extends NetworkEvent {
     this.authId = authId;
     this.accessGranted = accessGranted;
   }
-
-  @Override
-  public String toString() {
-    return "AUTH EVENT from " + senderId.getUsername();
-  }
-
 }

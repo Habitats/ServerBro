@@ -33,7 +33,8 @@ public class Authenticator {
   public boolean authenticate(NetworkEvent event) {
     Identity sender = event.getSender();
     if (authenticatedUsers.containsKey(sender.getUsername().toLowerCase())) {
-      if (authenticatedUsers.get(sender.getUsername()).getPassword().equals(sender.getPassword()))
+      Identity identified = authenticatedUsers.get(sender.getUsername().toLowerCase());
+      if (identified.getPassword().equals(sender.getPassword()))
         return true;
     }
     return false;

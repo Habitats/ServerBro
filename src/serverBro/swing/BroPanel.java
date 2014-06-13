@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 import serverBro.broShared.BroModel;
+import serverBro.broShared.misc.Config;
 import serverBro.broShared.view.BroGuiConstants;
 import serverBro.broShared.view.BroGuiController;
 
@@ -64,7 +65,7 @@ public class BroPanel extends JPanel implements Observer {
   @Override
   public void update(Observable o, Object arg) {
     BroModel model = (BroModel) o;
-    statusField.setText(model.getNetworkStatus());
+    statusField.setText(Config.getInstance().getNetworkStatus());
     messageFeed.append(model.getLastMessage() + "\n");
     statusField.setText(model.getName());
     // infoField.setText(model.getProcesses().toString());

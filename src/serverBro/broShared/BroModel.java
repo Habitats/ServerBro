@@ -18,17 +18,11 @@ public class BroModel extends Observable {
 
   private List<String> messages;
   private String lastMessage = "lastMessage not set";
-  private String networkStatus = "networkStatus not set";
   private String name = "name not set";
   private ComputerInfo computerInfo;
 
   public BroModel() {
     messages = new ArrayList<String>();
-  }
-
-  public void setNetworkStatus(String networkStatus) {
-    this.networkStatus = networkStatus;
-    update();
   }
 
   public void setName(String name) {
@@ -69,11 +63,11 @@ public class BroModel extends Observable {
     return name;
   }
 
-  public String getNetworkStatus() {
-    return networkStatus;
-  }
-
   public ComputerInfo getComputerInfo() {
     return computerInfo;
+  }
+
+  public void eventReceived() {
+    update();
   }
 }

@@ -16,8 +16,8 @@ public class Identity implements Serializable {
   private String password;
 
   public Identity(String username, String password) {
-    this.username = username;
-    this.password = password;
+    this.username = username.trim();
+    this.password = password.trim();
   }
 
   public String getUsername() {

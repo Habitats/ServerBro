@@ -2,6 +2,7 @@ package serverBro.broShared.events.external;
 
 import serverBro.broShared.Controller;
 import serverBro.broShared.Identity;
+import serverBro.broShared.misc.Config;
 
 
 
@@ -10,7 +11,7 @@ public class MessageEvent extends NetworkEvent {
   public final String message;
 
   public MessageEvent(String message) {
-    this(message,null);
+    this(message,Config.getInstance().getId());
   }
 
   public MessageEvent(String message, Identity sender) {

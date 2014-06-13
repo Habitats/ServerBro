@@ -25,7 +25,6 @@ public class ServerController extends Controller {
     super(view);
 
     model.setName("server");
-    model.setNetworkStatus("online!");
     auth = new Authenticator();
     serverInfoManager = new ServerInfoManager();
   }

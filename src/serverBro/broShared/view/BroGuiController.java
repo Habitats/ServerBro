@@ -18,10 +18,6 @@ public abstract class BroGuiController implements BroView {
     model.setName(name);
   }
 
-  public void displayNetworkStatus(String status) {
-    model.setNetworkStatus(status);
-  }
-
   @Override
   public void setBroViewListener(BroViewListener controller) {
     this.controller = controller;

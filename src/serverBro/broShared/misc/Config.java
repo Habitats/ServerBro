@@ -24,7 +24,7 @@ public class Config {
 
 
   private Config() {
-    id = new Identity("mrherp","derp");
+    id = new Identity("mrherp", "derp");
     properties = new Properties();
   }
 
@@ -146,6 +146,10 @@ public class Config {
   }
 
   public void setServerHostname(String serverHostname) {
-    this.serverHostname = serverHostname;
+    this.serverHostname = serverHostname.trim();
+  }
+
+  public String getNetworkStatus() {
+    return connected ? ("Connected: " + id.getUsername() + "@" + serverHostname + ":" + serverPort) : "Not connected";
   }
 }
