@@ -14,6 +14,7 @@ public class DisconnectButtonEvent extends ViewEvent {
     if (Config.getInstance().isConnected()) {
       controller.sendEvent(new BroadCastEvent(Config.getInstance().getId().getUsername() + " is disconnecting!"));
       controller.stopService();
+      controller.model.addMessage("Disconnected");
     } else {
       Logger.log("Already disconnected.");
     }

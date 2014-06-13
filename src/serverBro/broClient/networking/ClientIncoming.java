@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import serverBro.broShared.events.external.ConnectedMessageEvent;
 import serverBro.broShared.events.external.MessageEvent;
 import serverBro.broShared.events.external.NetworkEvent;
 import serverBro.broShared.misc.Config;
@@ -58,7 +59,7 @@ public class ClientIncoming implements Runnable {
       Logger.log("Initiating streams...");
 
       // handshake sorta thing
-      clientController.sendEvent(new MessageEvent("hello server"));
+      clientController.sendEvent(new ConnectedMessageEvent());
       while ((serializable = (Serializable) in.readObject()) != null) {
         if (Config.getInstance().encryptionEnabled()) {
           serializable = CryptoManager.getInstance().decryptNetworkEvent(serializable);
