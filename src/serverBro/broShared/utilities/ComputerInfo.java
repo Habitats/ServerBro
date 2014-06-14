@@ -20,6 +20,7 @@ public class ComputerInfo implements Serializable, ComputerInfoInterface {
   private List<ComputerProcess> runningUserProcesses;
 
   private List<String> simpleInfoList;
+  private NetworkStats networkStats;
 
   public ComputerInfo() {
     simpleInfoList = new ArrayList<String>();
@@ -76,5 +77,23 @@ public class ComputerInfo implements Serializable, ComputerInfoInterface {
 
   public ArrayList<String> getSimpleInfoList() {
     return (ArrayList<String>) simpleInfoList;
+  }
+
+  public List<String> getSimpleProcessInfo() {
+    List<String> simpleList = new ArrayList<String>();
+    for (ComputerProcess process : runningProcesses) {
+      simpleList.add(process.toString());
+    }
+    return simpleList;
+  }
+
+  public void setNetworkStats(NetworkStats networkStats) {
+    this.networkStats = networkStats;
+    simpleInfoList.add(networkStats.toString());
+  }
+
+  @Override
+  public NetworkStats getNetworkStats() {
+    return networkStats;
   }
 }

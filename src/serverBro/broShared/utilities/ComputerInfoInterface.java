@@ -14,5 +14,6 @@ public interface ComputerInfoInterface {
 
   public List<ComputerProcess> getRunningUserProcesses();
 
+  public NetworkStats getNetworkStats();
 
 }

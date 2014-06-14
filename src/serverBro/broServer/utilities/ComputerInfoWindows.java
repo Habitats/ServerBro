@@ -23,10 +23,12 @@ import javax.management.ReflectionException;
 
 import org.apache.commons.io.IOUtils;
 
+import serverBro.broShared.misc.Config;
 import serverBro.broShared.misc.Logger;
 import serverBro.broShared.utilities.ComputerInfoInterface;
 import serverBro.broShared.utilities.ComputerProcess;
 import serverBro.broShared.utilities.CpuStats;
+import serverBro.broShared.utilities.NetworkStats;
 import serverBro.broShared.utilities.RamStats;
 import serverBro.broShared.utilities.UptimeStats;
 
@@ -65,7 +67,7 @@ public class ComputerInfoWindows implements ComputerInfoInterface {
       String processName = getField(0, lengths, ps);
       String sessionId = getField(2, lengths, ps);
       int pid = Integer.parseInt(getField(1, lengths, ps));
-      String memory = getField(4, lengths, ps);
+      int memory = Integer.parseInt(getField(4, lengths, ps).replaceAll("[^0-9]", ""));
       String status = getField(5, lengths, ps);
       ComputerProcess process = new ComputerProcess(processName, sessionId, pid, memory, status);
       processes.add(process);
@@ -98,6 +100,37 @@ public class ComputerInfoWindows implements ComputerInfoInterface {
   public List<ComputerProcess> getRunningProcesses() {
     return processes;
   }
+
+  @Override
+  public NetworkStats getNetworkStats() {
+    Process proc = null;
+    String myString = "";
+    try {
+      proc = Runtime.getRuntime().exec("cscript " + Config.getInstance().getSpeedScriptLocation());
+      InputStream procOutput = proc.getInputStream();
+      myString = IOUtils.toString(procOutput, "UTF-8");
+    } catch (IOException e) {
+      Logger.error("Couldn't get running processes", e);
+    }
+    int totalSent = 0;
+    int totalReceived = 0;
+    myString = myString.split(";")[1];
+    for (String line : myString.split("@")) {
+      if (line.trim().length() > 0) {
+        String tmp = line.split("\\n")[2];
+        tmp = tmp.split(":")[1];
+        totalSent += keepNumbers(tmp.split(",")[0]);
+        totalReceived += keepNumbers(line.split("\\n")[3].split(":")[1].split(",")[0]);
+      }
+    }
+
+    return new NetworkStats(totalSent, totalReceived);
+  }
+
+  private int keepNumbers(String s) {
+    return Integer.parseInt(s.replaceAll("[^0-9]", ""));
+  }
+
 
   @Override
   public CpuStats getCpuStats() {

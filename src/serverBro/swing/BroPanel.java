@@ -42,7 +42,7 @@ public class BroPanel extends JPanel implements Observer {
     messageFeed = new ContinuousFeedArea();
 
     setLayout(new GridBagLayout());
-    Dimension dim = new Dimension(500, 200);
+    Dimension dim = new Dimension(1000, 400);
     setPreferredSize(dim);
     setMinimumSize(dim);
     setMaximumSize(dim);

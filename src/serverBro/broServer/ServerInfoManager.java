@@ -21,6 +21,7 @@ public class ServerInfoManager {
     computerInfo.setUptimeStats(computerInfoWindows.getUptimeStats());
     computerInfo.setRunningProcesses(computerInfoWindows.getRunningProcesses());
     computerInfo.setRunningUserProcesses(computerInfoWindows.getRunningUserProcesses());
+    computerInfo.setNetworkStats(computerInfoWindows.getNetworkStats());
     // TODO Auto-generated method stub
     return computerInfo;
   }

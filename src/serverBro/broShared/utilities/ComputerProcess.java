@@ -4,12 +4,12 @@ import java.io.Serializable;
 
 public class ComputerProcess implements Serializable {
   private final String processName;
-  private final String memory;
+  private final int memory;
   private final int pid;
   private final String sessionId;
   private final String status;
 
-  public ComputerProcess(String processName, String sessionId, int pid, String memory, String status) {
+  public ComputerProcess(String processName, String sessionId, int pid, int memory, String status) {
     this.processName = processName;
     this.sessionId = sessionId;
     this.pid = pid;
@@ -17,8 +17,8 @@ public class ComputerProcess implements Serializable {
     this.status = status;
   }
 
-  public String getMemory() {
-    return memory;
+  public String getMemoryInMB() {
+    return memory/1024 + " MB";
   }
 
   public int getPid() {

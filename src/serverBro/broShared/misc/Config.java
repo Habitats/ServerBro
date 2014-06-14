@@ -96,6 +96,7 @@ public class Config {
   private int serverPort;
   private boolean loginEnabled;
   private String serverHostname;
+  private String speedScriptLocation = "src/serverBro/extra/speed.vbs";
 
   public synchronized void setConnected(boolean connected) {
     this.connected = connected;
@@ -151,5 +152,9 @@ public class Config {
 
   public String getNetworkStatus() {
     return connected ? ("Connected: " + id.getUsername() + "@" + serverHostname + ":" + serverPort) : "Not connected";
+  }
+
+  public String getSpeedScriptLocation() {
+    return speedScriptLocation;
   }
 }
