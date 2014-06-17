@@ -62,7 +62,12 @@ public class ClientIncoming implements Runnable {
       clientController.sendEvent(new ConnectedMessageEvent());
       while ((serializable = (Serializable) in.readObject()) != null) {
         if (Config.getInstance().encryptionEnabled()) {
-          serializable = CryptoManager.getInstance().decryptNetworkEvent(serializable);
+          try {
+            serializable = CryptoManager.getInstance().decryptNetworkEvent(serializable);
+          } catch (Exception e) {
+            Logger.error("Unable to decrypt! Disregarding...", e);
+            continue;
+          }
         }
         event = (NetworkEvent) serializable;
         synchronized (event) {

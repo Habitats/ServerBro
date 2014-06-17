@@ -56,19 +56,25 @@ public class CryptoManager {
     return cipher;
   }
 
-  public Serializable decrypt(Key key, SealedObject object) {
+  public synchronized Serializable decrypt(Key key, SealedObject object) {
     Serializable decrypted = null;
     try {
       Cipher cipher = generateCipher();
       cipher.init(Cipher.DECRYPT_MODE, key);
       decrypted = (Serializable) object.getObject(cipher);
-    } catch (ClassNotFoundException | IllegalBlockSizeException | BadPaddingException | IOException | InvalidKeyException e) {
+      Logger.log("decrypted: " + decrypted);
+      Logger.log("object:" + object);
+    } catch (ClassNotFoundException | ClassCastException | IllegalBlockSizeException | BadPaddingException | IOException | InvalidKeyException e) {
       Logger.error("Unable to decrypt object", e);
+    } finally {
+      if (decrypted == null) {
+        System.out.println();
+      }
     }
     return decrypted;
   }
 
-  public SealedObject encrypt(Key key, Serializable object) {
+  public synchronized SealedObject encrypt(Key key, Serializable object) {
     SealedObject encrypted = null;
     try {
       Cipher cipher = generateCipher();
@@ -94,8 +100,11 @@ public class CryptoManager {
     System.out.println(msg.toString());
   }
 
-  public NetworkEvent decryptNetworkEvent(Serializable event) {
-    return (NetworkEvent) decrypt(key, (SealedObject) event);
+  public NetworkEvent decryptNetworkEvent(Serializable sealed) {
+    NetworkEvent event = null;
+    System.out.println(sealed);
+    event = (NetworkEvent) decrypt(key, (SealedObject) sealed);
+    return event;
   }
 
   public Serializable encryptNetworkEvent(Serializable event) {
